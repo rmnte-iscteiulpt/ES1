@@ -1,4 +1,4 @@
-package antiSpamFilter.gui;
+package antiSpamFilter.gui.panes;
 
 import java.awt.Rectangle;
 
@@ -10,16 +10,16 @@ import javax.swing.table.DefaultTableModel;
  * @author rmnte-iscteiulpt
  *
  */
-public class TablePane {
+@SuppressWarnings("serial")
+public class TablePane extends JScrollPane	{
 
-	private JScrollPane sp;
 	private JTable table;
 	
-	TablePane(Rectangle bounds)	{
-		sp = new JScrollPane();
+	public TablePane(Rectangle bounds)	{
+		super();
 		table = new JTable();
-		sp.setBounds(bounds);
-		sp.setViewportView(table);
+		setBounds(bounds);
+		setViewportView(table);
 		// TODO Add way to read file and create the matrix rules and weight field
 		table.setModel(new DefaultTableModel(
 				new Object[][] {
@@ -32,9 +32,11 @@ public class TablePane {
 					"Rule", "Weight"
 				}
 			){
+				@SuppressWarnings("rawtypes")
 				Class[] columnTypes = new Class[] {
 					String.class, Float.class
 				};
+				@SuppressWarnings({ "unchecked", "rawtypes" })
 				public Class getColumnClass(int columnIndex) {
 					return columnTypes[columnIndex];
 				}
@@ -50,10 +52,6 @@ public class TablePane {
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(1).setPreferredWidth(50);
 		table.getTableHeader().setReorderingAllowed(false);
-	}
-
-	public JScrollPane getScrollPane() {
-		return sp;
 	}
 
 	public JTable getTable() {
