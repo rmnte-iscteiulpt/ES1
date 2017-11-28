@@ -6,6 +6,7 @@ package antiSpamFilter.gui.panels;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,8 +25,8 @@ public class WorkspacePanel extends JPanel	{
 	private TablePane tablePane;
 	private JPanel resultsPanel;
 	
-	public WorkspacePanel(Rectangle bounds)	{
-		tablePane = new TablePane(new Rectangle(10, 11, 249, 150));
+	public WorkspacePanel(Rectangle bounds, ArrayList<String> list)	{
+		tablePane = new TablePane(new Rectangle(10, 11, 249, 150), list);
 		setBackground(Color.LIGHT_GRAY);
 		setBounds(bounds);
 		setLayout(null);
@@ -38,8 +39,6 @@ public class WorkspacePanel extends JPanel	{
 		resultsPanel.setBounds(280, 27, 150, 100);
 	}
 
-	
-	// TODO Create ResultsPanel class so values can be changed
 	private JPanel setupResultsPanel() {
 		resultsPanel = new JPanel();
 		resultsPanel.setLayout(null);
@@ -71,5 +70,9 @@ public class WorkspacePanel extends JPanel	{
 		evaluateButton.setBounds(30, 65, 90, 25);
 		
 		return resultsPanel;
+	}
+	
+	public void updateTableContent(ArrayList<String> list)	{
+		tablePane.updateContent(list);
 	}
 }

@@ -7,7 +7,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+
+import antiSpamFilter.gui.MainWindow;
 import antiSpamFilter.gui.panels.FileLocationPanel;
+import antiSpamFilter.tools.RulesUtility;
 
 @SuppressWarnings("serial")
 
@@ -19,15 +22,24 @@ import antiSpamFilter.gui.panels.FileLocationPanel;
  */
 public class OptionsDialog extends JDialog	{
 	
+	private MainWindow frame;//
+	
 	private JButton applyButton;
 	private JButton cancelButton;
 	private JButton okButton;
+	
+	private FileLocationPanel rulesPanel;
+	private FileLocationPanel spamPanel;
+	private FileLocationPanel hamPanel;
+	
+	private RulesUtility rulesUtility;	// Should this manage all the config files?
 
 	/**
 	 * Constructor
 	 */
-	public OptionsDialog(JFrame frame)	{
+	public OptionsDialog(MainWindow frame)	{
 		super(frame, "Options", true);
+		this.frame = frame;
 		setLayout(null);
 		setResizable(false);
 		setSize(468,365);
@@ -59,11 +71,11 @@ public class OptionsDialog extends JDialog	{
 		int panelWidth = 468;
 		int panelHeight = 100;
 		// Initialize panels
-		FileLocationPanel rulesPanel = new FileLocationPanel(new Rectangle(0, 0, panelWidth, panelHeight), "Rules.cf");
+		rulesPanel = new FileLocationPanel(new Rectangle(0, 0, panelWidth, panelHeight), "Rules.cf");
 		add(rulesPanel);
-		FileLocationPanel spamPanel = new FileLocationPanel(new Rectangle(0, panelHeight, panelWidth, panelHeight), "Spam.log");
+		spamPanel = new FileLocationPanel(new Rectangle(0, panelHeight, panelWidth, panelHeight), "Spam.log");
 		add(spamPanel);
-		FileLocationPanel hamPanel = new FileLocationPanel(new Rectangle(0, 2*panelHeight, panelWidth, panelHeight), "Ham.log");
+		hamPanel = new FileLocationPanel(new Rectangle(0, 2*panelHeight, panelWidth, panelHeight), "Ham.log");
 		add(hamPanel);
 	}
 	
@@ -75,22 +87,31 @@ public class OptionsDialog extends JDialog	{
 		applyButton.addActionListener(new ActionListener()	{  
             public void actionPerformed(ActionEvent e)  
             {  
-                //apply();
+                apply();
             }
         });  
 		cancelButton.addActionListener(new ActionListener()	{  
             public void actionPerformed(ActionEvent e)  
             {  
+            	// TODO Revert changes made, its memorizing what we typed etc...
                 setVisible(false); 
             }
         });  
 		okButton.addActionListener(new ActionListener()	{  
             public void actionPerformed(ActionEvent e)  
             {  
-            	//apply();
+            	apply();
                 setVisible(false); 
             }
-        });  
+        });
+		rulesUtility = new RulesUtility();
+	}
+	
+	// TODO Only rules.cf file works, implement spam and ham log files
+	private void apply()	{
+		if(rulesPanel.changed())	{
+			frame.updateRulesPathChanges(rulesPanel.getFilePath());
+		}
 	}
 
 }

@@ -1,6 +1,7 @@
 package antiSpamFilter.gui.panes;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -15,19 +16,24 @@ public class TablePane extends JScrollPane	{
 
 	private JTable table;
 	
-	public TablePane(Rectangle bounds)	{
+	public TablePane(Rectangle bounds, ArrayList<String> list)	{
+		// TODO Add option for it to be editable (manual workspace)
 		super();
 		table = new JTable();
 		setBounds(bounds);
 		setViewportView(table);
 		// TODO Add way to read file and create the matrix rules and weight field
+		updateContent(list);
+	}
+	
+	public void updateContent(ArrayList<String> list)	{
+		Object[][] o = new Object[list.size()][2]; 
+		for(int i = 0; i<list.size(); i++)	{
+			o[i][0] = list.get(i);
+		}
+		// TODO Is there a better way to update the table's values without making it from scratch everytime?
 		table.setModel(new DefaultTableModel(
-				new Object[][] {
-					{null, null},
-					{null, null},
-					{null, null},
-					{null, null},
-				},
+				o,
 				new String[] {
 					"Rule", "Weight"
 				}

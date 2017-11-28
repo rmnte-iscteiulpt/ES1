@@ -23,6 +23,7 @@ public class FileLocationPanel extends JPanel	{
 	private JLabel label;
 	private JTextField path;
 	private JCheckBox checkBox;
+	private String oldPath;
 	
 	public FileLocationPanel(Rectangle bounds, String fileName)	{
 		setBounds(bounds);
@@ -53,6 +54,25 @@ public class FileLocationPanel extends JPanel	{
                 path.setEditable(checkBox.isSelected());
             }
         });  
+		oldPath = path.getText();	// Needs to be ""
 	}
 	
+	public boolean changed()	{
+		if(!getFilePath().equals(oldPath))	{
+			oldPath = getFilePath();
+			return true;
+		}	else	{
+			return false;
+		}
+
+	}
+	
+	public String getFilePath()	{
+		if(checkBox.isSelected())	{
+			return path.getText();
+		}	else	{
+			return "";
+		}
+		
+	}
 }
