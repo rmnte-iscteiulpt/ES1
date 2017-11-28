@@ -35,6 +35,8 @@ public class MainWindow extends JFrame	{
 	 * TODO
 	 * There should be a mainEngine. This will have the manual engine and autoamtic engine. These engines will be threads? And process things etc...
 	 * The main engine will make the panel engines work etc...
+	 * 
+	 * Rules.cf path is updated twice in logs. Why? TO FIX
 	 */
 	
 	private JButton optionsButton;

@@ -28,5 +28,4 @@ public class ManualEngine extends Observable	{
 		notifyObservers(rulesList);
 	}
 
-
 }
