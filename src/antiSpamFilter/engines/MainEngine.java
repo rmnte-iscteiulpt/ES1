@@ -15,15 +15,12 @@ public class MainEngine {
 	private AutomaticEngine autoEngine;
 	
 	private RulesUtility rulesUtility;
+
 	 
 	public MainEngine()	{
-		this(new ManualEngine(), new AutomaticEngine());
-	}
-	
-	public MainEngine(ManualEngine me, AutomaticEngine ae) {
-		manualEngine = me;
-		autoEngine = ae;
 		rulesUtility = new RulesUtility();
+		manualEngine = new ManualEngine(rulesUtility.getRulesList());
+		autoEngine = new AutomaticEngine(rulesUtility.getRulesList());
 	}
 
 	public void updateRulesUtility(String path) {

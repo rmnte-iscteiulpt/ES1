@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import antiSpamFilter.gui.panes.TablePane;
+import antiSpamFilter.misc.RulesConfigList;
 
 /**
  * @author skner
@@ -25,8 +26,8 @@ public class WorkspacePanel extends JPanel	{
 	private TablePane tablePane;
 	private JPanel resultsPanel;
 	
-	public WorkspacePanel(Rectangle bounds, ArrayList<String> list)	{
-		tablePane = new TablePane(new Rectangle(10, 11, 249, 150), list);
+	public WorkspacePanel(Rectangle bounds, RulesConfigList configList, boolean editableWeights)	{
+		tablePane = new TablePane(new Rectangle(10, 11, 249, 150), configList, editableWeights);
 		setBackground(Color.LIGHT_GRAY);
 		setBounds(bounds);
 		setLayout(null);
@@ -72,7 +73,7 @@ public class WorkspacePanel extends JPanel	{
 		return resultsPanel;
 	}
 	
-	public void updateTableContent(ArrayList<String> list)	{
-		tablePane.updateContent(list);
+	public void updateTableContent(RulesConfigList arg)	{
+		tablePane.updateContent(arg);
 	}
 }

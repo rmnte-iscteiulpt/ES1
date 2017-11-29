@@ -26,8 +26,6 @@ import antiSpamFilter.tools.LoadingTimer;
  * @param  frame  The main frame of the software
  * @param  optionsButton (WIP) Button that opens the options pop-up window
  * @param  saveButton (WIP) Button that saves work
- * @param  manualTablePane TablePane view of the manual workspace
- * @param  automaticTablePane TablePane view of the automatic workspace
  */
 public class MainWindow extends JFrame	{
 	
@@ -36,9 +34,9 @@ public class MainWindow extends JFrame	{
 	 * There should be a mainEngine. This will have the manual engine and autoamtic engine. These engines will be threads? And process things etc...
 	 * The main engine will make the panel engines work etc...
 	 * 
-	 * Rules.cf path is updated twice in logs. Why? TO FIX
+	 * TODO Bugs
+	 * 
 	 */
-	
 	private JButton optionsButton;
 	private JButton saveButton;
 	private AlgorithmWorkspace autoPanel;
@@ -76,7 +74,6 @@ public class MainWindow extends JFrame	{
 		setResizable(false);
 		
 		OptionsDialog optionWindow = new OptionsDialog(this);
-		
 		setupManualPanel();
 		setupAutomaticPanel();
 		optionsButton = new JButton("Options");
@@ -97,7 +94,7 @@ public class MainWindow extends JFrame	{
 	}
 
 	private void setupManualPanel() {
-		manualPanel = new ManualWorkspace(new Rectangle(10, 31, 674, 200), mainEngine.getRulesUtility().getRulesList());
+		manualPanel = new ManualWorkspace(new Rectangle(10, 31, 674, 200), mainEngine.getManualEngine().getConfigList());
 		add(manualPanel);
 		
 		JLabel manualText = new JLabel("Manual Workspace");
@@ -107,7 +104,7 @@ public class MainWindow extends JFrame	{
 	}
 	
 	private void setupAutomaticPanel() {
-		autoPanel = new AlgorithmWorkspace(new Rectangle(10, 264, 674, 200), mainEngine.getRulesUtility().getRulesList());
+		autoPanel = new AlgorithmWorkspace(new Rectangle(10, 264, 674, 200), mainEngine.getAutoEngine().getConfigList());
 		add(autoPanel);
 
 		JLabel automaticText = new JLabel("Automatic Workspace");

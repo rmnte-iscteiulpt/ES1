@@ -31,8 +31,6 @@ public class OptionsDialog extends JDialog	{
 	private FileLocationPanel rulesPanel;
 	private FileLocationPanel spamPanel;
 	private FileLocationPanel hamPanel;
-	
-	private RulesUtility rulesUtility;	// Should this manage all the config files?
 
 	/**
 	 * Constructor
@@ -104,7 +102,6 @@ public class OptionsDialog extends JDialog	{
                 setVisible(false); 
             }
         });
-		rulesUtility = new RulesUtility();
 	}
 	
 	// TODO Only rules.cf file works, implement spam and ham log files

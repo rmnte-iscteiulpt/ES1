@@ -9,6 +9,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import antiSpamFilter.gui.panels.WorkspacePanel;
+import antiSpamFilter.misc.RulesConfigList;
 
 /**
  * @author skner
@@ -17,8 +18,8 @@ import antiSpamFilter.gui.panels.WorkspacePanel;
 @SuppressWarnings("serial")
 public class AlgorithmWorkspace extends WorkspacePanel implements Observer	{
 
-	public AlgorithmWorkspace(Rectangle bounds, ArrayList<String> rulesList) {
-		super(bounds, rulesList);
+	public AlgorithmWorkspace(Rectangle bounds, RulesConfigList configList) {
+		super(bounds, configList, false);
 		generateAlgorithmLayout();
 	}
 

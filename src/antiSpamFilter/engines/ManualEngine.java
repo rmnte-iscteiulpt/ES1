@@ -6,26 +6,32 @@ package antiSpamFilter.engines;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import antiSpamFilter.misc.RulesConfigList;
+
 /**
  * @author skner
  *
  */
 public class ManualEngine extends Observable	{
 	
-	private ArrayList<String> rulesList;
+	private RulesConfigList configList;
 	
 	public ManualEngine() {
 		this(new ArrayList<String>());
 	}
 	
 	public ManualEngine(ArrayList<String> list)	{
-		rulesList = list;
+		configList = new RulesConfigList(list);
 	}
 
 	public void updateRules(ArrayList<String> rulesList) {
-		this.rulesList = rulesList;
+		configList.updateRules(rulesList);
 		setChanged();
-		notifyObservers(rulesList);
+		notifyObservers(this.configList);
+	}
+	
+	public RulesConfigList getConfigList()	{
+		return configList;
 	}
 
 }

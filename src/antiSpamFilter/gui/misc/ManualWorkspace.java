@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import antiSpamFilter.gui.panels.WorkspacePanel;
+import antiSpamFilter.misc.RulesConfigList;
 
 /**
  * @author skner
@@ -30,8 +31,8 @@ public class ManualWorkspace extends WorkspacePanel implements Observer	{
 	 * 
 	 * @param bounds
 	 */
-	public ManualWorkspace(Rectangle bounds, ArrayList<String> rulesList) {
-		super(bounds, rulesList);
+	public ManualWorkspace(Rectangle bounds, RulesConfigList configList) {
+		super(bounds, configList, true);
 		generateManualLayout();
 	}
 	
@@ -56,7 +57,7 @@ public class ManualWorkspace extends WorkspacePanel implements Observer	{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		updateTableContent((ArrayList<String>)arg);
+		updateTableContent((RulesConfigList)arg);
 	}
 
 
