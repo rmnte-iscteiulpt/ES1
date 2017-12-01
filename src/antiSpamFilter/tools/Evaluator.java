@@ -3,7 +3,11 @@
  */
 package antiSpamFilter.tools;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import antiSpamFilter.misc.RulesConfigList;
 
 /**
  * @author skner
@@ -66,13 +70,63 @@ public class Evaluator {
 		}
 	}
 	
-	public int[] evaluate(ArrayList<String> rulesList, float[] weightList)	{
+	public int[] evaluate(RulesConfigList list)	{
 		int[] res = {0,0};	// FP and FN
-		// Check for inconsistencies in rulesLIst and weightList. For example: they need to have the same size...
+		// Check for inconsistencies in rulesList and weightList. For example: they need to have the same size...
 		
 		// Load ham.log file from path and check for FP
+		try	{
+			BufferedReader br = new BufferedReader(new FileReader(hamPath));
+			String aux = br.readLine();
+			String[] args = null;
+			while(aux != null)	{
+				args = aux.split("\t");
+			    // Assuming there's no inconsistencies. For now... TODO
+				float sum = 0f;
+			    for(int i = 1; i<args.length; i++)	{	// For each i in args sums the weight value for the respective rule, storing it in the var sum.
+			    	sum+= list.getRuleWeight(args[i]);
+			    }
+			    // Increments the FP if it found spam in the ham file.
+			    if(sum>5)	{
+			    	res[0]++;
+			    }
+			    aux = br.readLine();
+			}
+			System.out.println("Found " + res[0] + " false positives in the current configuration.");
+			br.close();
+			
+		} catch (FileNotFoundException e1) {
+			System.out.println("Path for  file doesn't exist. Using the default file.");
+			// TODO Add a way to use the default file if the custom file doesn't exist.
+		} catch (IOException e1) {
+		}
 		
 		// Load spam.log file from path and check for FN
+		try	{
+			BufferedReader br = new BufferedReader(new FileReader(spamPath));
+			String aux = br.readLine();
+			String[] args = null;
+			while(aux != null)	{
+				args = aux.split("\t");
+			    // Assuming there's no inconsistencies. For now... TODO
+				float sum = 0f;
+			    for(int i = 1; i<args.length; i++)	{	// For each i in args sums the weight value for the respective rule, storing it in the var sum.
+			    	sum+= list.getRuleWeight(args[i]);
+			    }
+			    // Increments the FN if it found safe messages in the spam file.
+			    if(sum<5)	{
+			    	res[1]++;
+			    }
+			    aux = br.readLine();
+			}
+			System.out.println("Found " + res[1] + " false negatives in the current configuration.");
+			br.close();
+			
+		} catch (FileNotFoundException e1) {
+			System.out.println("Path for  file doesn't exist. Using the default file.");
+			// TODO Add a way to use the default file if the custom file doesn't exist.
+		} catch (IOException e1) {
+		}
 		
 		return res;
 	}

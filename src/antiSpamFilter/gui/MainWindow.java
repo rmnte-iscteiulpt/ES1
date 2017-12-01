@@ -13,24 +13,12 @@ import antiSpamFilter.gui.dialogs.OptionsDialog;
 import antiSpamFilter.gui.misc.AlgorithmWorkspace;
 import antiSpamFilter.gui.misc.ManualWorkspace;
 import antiSpamFilter.tools.LoadingTimer;
-/**
- * Main window for the software. The code here defines all the sections, text and parts of the graphical interface.
- *
- * @author rmnte-iscteiulpt
- * 
- * @param  frame  The main frame of the software
- * @param  optionsButton (WIP) Button that opens the options pop-up window
- * @param  saveButton (WIP) Button that saves work
- */
+
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
 	
 	/*
-	 * TODO
-	 * There should be a mainEngine. This will have the manual engine and autoamtic engine. These engines will be threads? And process things etc...
-	 * The main engine will make the panel engines work etc...
-	 * 
-	 * TODO Bugs
+	 * TODO Known Bugs:
 	 * 
 	 */
 	private JButton optionsButton;
@@ -51,7 +39,6 @@ public class MainWindow extends JFrame {
 	 * Creates the frame and renders it
 	 */
 	private void setupFrame()	{
-		// TODO The entire interface should be observable. So when the program runs only data is changed. The interface updates accordingly
 		LoadingTimer timer = new LoadingTimer();
 		System.out.println("Loading window...");
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);

@@ -6,6 +6,9 @@ package antiSpamFilter.gui.panels;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -55,22 +58,30 @@ public class WorkspacePanel extends JPanel	{
 		fnText.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		// Fields to be updated as the data changes
-		JTextField fpWeight = new JTextField("" + 0);
-		fpWeight.setEditable(false);
-		fpWeight.setHorizontalAlignment(JTextField.CENTER);
-		resultsPanel.add(fpWeight);
-		fpWeight.setBounds(110, 10, 26, 20);
-		JTextField fnWeight = new JTextField("" + 0);
-		fnWeight.setEditable(false);
-		fnWeight.setHorizontalAlignment(JTextField.CENTER);
-		resultsPanel.add(fnWeight);
-		fnWeight.setBounds(110, 35, 26, 20);
+		JTextField fpValue = new JTextField("" + 0);
+		fpValue.setEditable(false);
+		fpValue.setHorizontalAlignment(JTextField.CENTER);
+		resultsPanel.add(fpValue);
+		fpValue.setBounds(110, 10, 26, 20);
+		JTextField fnValue = new JTextField("" + 0);
+		fnValue.setEditable(false);
+		fnValue.setHorizontalAlignment(JTextField.CENTER);
+		resultsPanel.add(fnValue);
+		fnValue.setBounds(110, 35, 26, 20);
 		
 		// Button that triggers a function
 		JButton evaluateButton = new JButton("Evaluate");
 		resultsPanel.add(evaluateButton);
 		evaluateButton.setBounds(30, 65, 90, 25);
-		
+		evaluateButton.addActionListener(new ActionListener()	{  
+            public void actionPerformed(ActionEvent e)  
+            {  
+            	// TODO Tweak to get automatic engine too. Currently only works for manual
+            	int res[] = mainWindow.getMainEngine().getEvaluator().evaluate(mainWindow.getMainEngine().getManualEngine().getConfigList());
+            	fpValue.setText("" + res[0]);
+            	fnValue.setText("" + res[1]);
+            }
+        });
 		return resultsPanel;
 	}
 	

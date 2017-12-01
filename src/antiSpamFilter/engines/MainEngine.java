@@ -1,24 +1,19 @@
-/**
- * 
- */
 package antiSpamFilter.engines;
 
+import antiSpamFilter.tools.Evaluator;
 import antiSpamFilter.tools.RulesUtility;
 
-/**
- * @author skner
- *
- */
 public class MainEngine {
 
 	private ManualEngine manualEngine;
 	private AutomaticEngine autoEngine;
 	
+	private Evaluator evaluator;
 	private RulesUtility rulesUtility;
-
 	 
 	public MainEngine()	{
 		rulesUtility = new RulesUtility();
+		evaluator = new Evaluator();
 		manualEngine = new ManualEngine(rulesUtility.getRulesList());
 		autoEngine = new AutomaticEngine(rulesUtility.getRulesList());
 	}
@@ -39,5 +34,9 @@ public class MainEngine {
 	
 	public RulesUtility getRulesUtility()	{
 		return rulesUtility;
+	}
+	
+	public Evaluator getEvaluator()	{
+		return evaluator;
 	}
 }

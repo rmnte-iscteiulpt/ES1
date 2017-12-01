@@ -61,4 +61,14 @@ public class RulesConfigList {
 			System.err.println("Rules list is empty.");
 		}
 	}
+	
+	public float getRuleWeight(String rule)	{
+		// TODO QUESTION
+		// If the rule doesn't exist in the file, should it just throw an exception? Or just give a weight of 0? How to handle that situation?
+		// For now we're giving the weight value of 0
+		if(rulesList.indexOf(rule) == -1)	{
+			return 0f;
+		}
+		return weightList.get(rulesList.indexOf(rule));
+	}
 }

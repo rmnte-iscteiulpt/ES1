@@ -108,7 +108,15 @@ public class OptionsDialog extends JDialog	{
 	private void apply()	{
 		if(rulesPanel.changed())	{
 			frame.getMainEngine().updateRulesUtility(rulesPanel.getFilePath());
-			System.out.println("Options saved.");
+			System.out.println("Rules path updated.");
+		}
+		if(hamPanel.changed())	{
+			frame.getMainEngine().getEvaluator().updateHamPath(hamPanel.getFilePath());
+			System.out.println("Ham path updated.");
+		}
+		if(spamPanel.changed())	{
+			frame.getMainEngine().getEvaluator().updateSpamPath(spamPanel.getFilePath());
+			System.out.println("Spam path updated.");
 		}
 	}
 
