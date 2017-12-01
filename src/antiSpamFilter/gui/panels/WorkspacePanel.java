@@ -6,13 +6,12 @@ package antiSpamFilter.gui.panels;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
-import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import antiSpamFilter.gui.MainWindow;
 import antiSpamFilter.gui.panes.TablePane;
 import antiSpamFilter.misc.RulesConfigList;
 
@@ -23,11 +22,13 @@ import antiSpamFilter.misc.RulesConfigList;
 @SuppressWarnings("serial")
 public class WorkspacePanel extends JPanel	{
 	
-	private TablePane tablePane;
+	protected MainWindow mainWindow;
+	protected TablePane tablePane;
 	private JPanel resultsPanel;
 	
-	public WorkspacePanel(Rectangle bounds, RulesConfigList configList, boolean editableWeights)	{
+	public WorkspacePanel(Rectangle bounds, RulesConfigList configList, MainWindow mainWindow, boolean editableWeights)	{
 		tablePane = new TablePane(new Rectangle(10, 11, 249, 150), configList, editableWeights);
+		this.mainWindow = mainWindow;
 		setBackground(Color.LIGHT_GRAY);
 		setBounds(bounds);
 		setLayout(null);
@@ -76,4 +77,6 @@ public class WorkspacePanel extends JPanel	{
 	public void updateTableContent(RulesConfigList arg)	{
 		tablePane.updateContent(arg);
 	}
+	
+	
 }

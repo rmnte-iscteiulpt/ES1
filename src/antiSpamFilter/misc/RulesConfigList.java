@@ -25,17 +25,16 @@ public class RulesConfigList {
 	}
 
 	public void updateWeightIndex(int i, float f)	{
-		// TODO Set range limit (-5 to 5)
 		weightList.set(i, f);
-	}
-	
-	public void updateWeights(ArrayList<Float> weightList) {
-		this.weightList = weightList;
 	}
 	
 	public void updateRules(ArrayList<String> rulesList)	{
 		this.rulesList = rulesList;
 		resetWeights();
+	}
+	
+	public void updateWeights(ArrayList<Float> weightList) {
+		this.weightList = weightList;
 	}
 	
 	public void resetWeights()	{
@@ -55,6 +54,7 @@ public class RulesConfigList {
 
 	private void checkErrors()	{
 		// Verify rules and weight lists for any inconsistencies
+		// TODO Handle exceptions
 		if(rulesList.size() != weightList.size())
 			System.err.println("Rules and weights provided don't match.");
 		if(rulesList.isEmpty())	{

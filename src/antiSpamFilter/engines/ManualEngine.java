@@ -26,12 +26,25 @@ public class ManualEngine extends Observable	{
 
 	public void updateRules(ArrayList<String> rulesList) {
 		configList.updateRules(rulesList);
-		setChanged();
-		notifyObservers(this.configList);
+		updateManualPanel();
+	}
+	
+	public void resetWeights()	{
+		configList.resetWeights();
+		updateManualPanel();
+	}
+	
+	public void updateWeights(ArrayList<Float> weightList)	{
+		configList.updateWeights(weightList);
 	}
 	
 	public RulesConfigList getConfigList()	{
 		return configList;
 	}
 
+	private void updateManualPanel()	{
+		setChanged();
+		notifyObservers(this.configList);
+	}
+	
 }

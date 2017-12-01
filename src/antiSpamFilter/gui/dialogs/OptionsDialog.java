@@ -107,7 +107,8 @@ public class OptionsDialog extends JDialog	{
 	// TODO Only rules.cf file works, implement spam and ham log files
 	private void apply()	{
 		if(rulesPanel.changed())	{
-			frame.updateRulesPathChanges(rulesPanel.getFilePath());
+			frame.getMainEngine().updateRulesUtility(rulesPanel.getFilePath());
+			System.out.println("Options saved.");
 		}
 	}
 

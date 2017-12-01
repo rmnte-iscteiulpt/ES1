@@ -20,7 +20,7 @@ public class Evaluator {
 	 * TODO
 	 * How will the evaluator work
 	 * First grabs the spam and ham files
-	 * After that for each line (example) will see what some rules are applied. We should search the rules in the config file, and sum their weights.
+	 * After that for each line (example) will see what rules are applied. We should search the rules in the config file, and sum their weights.
 	 * 
 	 * Safe message found in spam:	FN++;
 	 * Spam message found in ham:	FP++;

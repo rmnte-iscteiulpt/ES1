@@ -4,13 +4,13 @@
 package antiSpamFilter.gui.misc;
 
 import java.awt.Rectangle;
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
-
+import antiSpamFilter.gui.MainWindow;
 import antiSpamFilter.gui.panels.WorkspacePanel;
 import antiSpamFilter.misc.RulesConfigList;
 
@@ -21,7 +21,7 @@ import antiSpamFilter.misc.RulesConfigList;
 @SuppressWarnings("serial")
 public class ManualWorkspace extends WorkspacePanel implements Observer	{
 
-	private JButton revertButton;
+	private JButton resetButton;
 	private JButton discardButton;
 	private JButton applyButton;
 	private JButton exportButton;
@@ -31,16 +31,17 @@ public class ManualWorkspace extends WorkspacePanel implements Observer	{
 	 * 
 	 * @param bounds
 	 */
-	public ManualWorkspace(Rectangle bounds, RulesConfigList configList) {
-		super(bounds, configList, true);
+	public ManualWorkspace(Rectangle bounds, MainWindow mainWindow, RulesConfigList configList) {
+		super(bounds, configList, mainWindow, true);
 		generateManualLayout();
+		setupFunctionality();
 	}
 	
 	private void generateManualLayout() {
 		// Buttons
-		revertButton = new JButton("Search");
-		add(revertButton);
-		revertButton.setBounds(11, 168, 75, 25);
+		resetButton = new JButton("Reset");
+		add(resetButton);
+		resetButton.setBounds(11, 168, 75, 25);
 		discardButton = new JButton("Discard");
 		add(discardButton);
 		discardButton.setBounds(98, 168, 80, 25);
@@ -54,12 +55,45 @@ public class ManualWorkspace extends WorkspacePanel implements Observer	{
 		add(importButton);
 		importButton.setBounds(280, 138, 150, 25);
 	}
+	
+	private void setupFunctionality()	{
+		resetButton.addActionListener(new ActionListener()	{  
+            public void actionPerformed(ActionEvent e)  
+            {
+            	reset();
+            }
+        });
+		discardButton.addActionListener(new ActionListener()	{  
+            public void actionPerformed(ActionEvent e)  
+            {  
+                discard();
+            }
+        });
+		applyButton.addActionListener(new ActionListener()	{  
+            public void actionPerformed(ActionEvent e)  
+            {  
+            	// TODO Add a change token for confirmation. Optional
+                apply();
+            }
+        });
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		updateTableContent((RulesConfigList)arg);
 	}
 
-
+	public void reset()	{
+		mainWindow.getMainEngine().getManualEngine().resetWeights();
+	}
+	
+	public void apply()	{
+		tablePane.applyChanges();
+		mainWindow.getMainEngine().getManualEngine().updateWeights(tablePane.getWeightList());
+	}
+	
+	public void discard()	{
+		tablePane.discardChanges();
+	}
 
 }

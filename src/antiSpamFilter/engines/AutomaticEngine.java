@@ -23,11 +23,15 @@ public class AutomaticEngine extends Observable	{
 
 	public void updateRules(ArrayList<String> rulesList) {
 		configList.updateRules(rulesList);
-		setChanged();
-		notifyObservers(this.configList);
+		updateAutoPanel();
 	}
 
 	public RulesConfigList getConfigList()	{
 		return configList;
+	}
+	
+	private void updateAutoPanel()	{
+		setChanged();
+		notifyObservers(this.configList);
 	}
 }

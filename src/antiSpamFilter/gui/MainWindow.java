@@ -1,22 +1,17 @@
 package antiSpamFilter.gui;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import javax.swing.*;
 
 import antiSpamFilter.engines.MainEngine;
-import antiSpamFilter.engines.ManualEngine;
 import antiSpamFilter.gui.dialogs.OptionsDialog;
 import antiSpamFilter.gui.misc.AlgorithmWorkspace;
 import antiSpamFilter.gui.misc.ManualWorkspace;
-import antiSpamFilter.gui.panels.WorkspacePanel;
-import antiSpamFilter.gui.panes.TablePane;
 import antiSpamFilter.tools.LoadingTimer;
 /**
  * Main window for the software. The code here defines all the sections, text and parts of the graphical interface.
@@ -27,7 +22,8 @@ import antiSpamFilter.tools.LoadingTimer;
  * @param  optionsButton (WIP) Button that opens the options pop-up window
  * @param  saveButton (WIP) Button that saves work
  */
-public class MainWindow extends JFrame	{
+@SuppressWarnings("serial")
+public class MainWindow extends JFrame {
 	
 	/*
 	 * TODO
@@ -94,7 +90,7 @@ public class MainWindow extends JFrame	{
 	}
 
 	private void setupManualPanel() {
-		manualPanel = new ManualWorkspace(new Rectangle(10, 31, 674, 200), mainEngine.getManualEngine().getConfigList());
+		manualPanel = new ManualWorkspace(new Rectangle(10, 31, 674, 200), this, mainEngine.getManualEngine().getConfigList());
 		add(manualPanel);
 		
 		JLabel manualText = new JLabel("Manual Workspace");
@@ -104,7 +100,7 @@ public class MainWindow extends JFrame	{
 	}
 	
 	private void setupAutomaticPanel() {
-		autoPanel = new AlgorithmWorkspace(new Rectangle(10, 264, 674, 200), mainEngine.getAutoEngine().getConfigList());
+		autoPanel = new AlgorithmWorkspace(new Rectangle(10, 264, 674, 200), this, mainEngine.getAutoEngine().getConfigList());
 		add(autoPanel);
 
 		JLabel automaticText = new JLabel("Automatic Workspace");
@@ -117,10 +113,9 @@ public class MainWindow extends JFrame	{
 		mainEngine.getManualEngine().addObserver(manualPanel);
 		mainEngine.getAutoEngine().addObserver(autoPanel);
 	}
-	
-	public void updateRulesPathChanges(String path)	{
-		// TODO Make spam and ham log files appear in engine.
-		mainEngine.updateRulesUtility(path);
-		System.out.println("Options saved.");
+
+	public MainEngine getMainEngine() {
+		return mainEngine;
 	}
+
 }

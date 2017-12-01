@@ -17,20 +17,20 @@ import antiSpamFilter.misc.RulesConfigList;
 public class TablePane extends JScrollPane	{
 
 	private boolean editable;
-	private JTable table;
-	
+	private JTable table;	// This table holds temporary values. The values used in the engine are from the weightList.
+	private ArrayList<Float> weightList;	// This arraylist holds the permanent values, used by the engine.
+
 	public TablePane(Rectangle bounds, RulesConfigList configList, boolean editable)	{
-		// TODO Add option for it to be editable (manual workspace)
 		super();
-		table = new JTable();
+		table = new JTable();	// TODO Show decimal places in JTable? Render Format JTable boolean...
 		this.editable = editable;
 		setBounds(bounds);
 		setViewportView(table);
-		// TODO Add way to read file and create the matrix rules and weight field
 		updateContent(configList);
+		updateWeightList();
 	}
 	
-	// TODO Add a way to edit the cells and apply them in the respective engines.
+	// TODO Link the weightList with the respective engine, by changing the values in the rulesconfiglist variable. 
 	public void updateContent(RulesConfigList arg)	{
 		Object[][] o = new Object[arg.getRulesList().size()][2]; 
 		for(int i = 0; i<arg.getRulesList().size(); i++)	{
@@ -70,4 +70,39 @@ public class TablePane extends JScrollPane	{
 		return table;
 	}
 	
+	public void updateWeightList()	{
+		boolean rangeExceeded = false;
+		weightList = new ArrayList<Float>();
+		for(int i = 0; i<table.getRowCount(); i++)	{
+			float f = (Float) table.getValueAt(i, 1);
+			if(f > 5f)	{	// Range restrictions
+				rangeExceeded = true;
+				weightList.add(5f);
+				table.setValueAt(5f, i, 1);
+			}	else	if(f < -5f)	{
+				rangeExceeded = true;
+				weightList.add(-5f);
+				table.setValueAt(-5f, i, 1);
+			}	else	{
+				weightList.add(f);
+			}
+		}
+		if(rangeExceeded)	{
+			System.out.println("Range exceeded in one or more cells. Changed weights to the range limit value.");
+		}
+	}
+	
+	public ArrayList<Float> getWeightList()	{
+		return weightList;
+	}
+	
+	public void applyChanges()	{
+		updateWeightList();
+	}
+	
+	public void discardChanges()	{
+		for(int i = 0; i<table.getRowCount(); i++)	{
+			table.setValueAt(weightList.get(i), i, 1);
+		}
+	}
 }
