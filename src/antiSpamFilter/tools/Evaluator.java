@@ -7,7 +7,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import antiSpamFilter.misc.RulesConfigList;
+
+import antiSpamFilter.datastore.RulesConfigList;
 
 /**
  * @author skner
@@ -71,8 +72,7 @@ public class Evaluator {
 	}
 	
 	public int[] evaluate(RulesConfigList list)	{
-		int[] res = {0,0};	// FP and FN
-		// Check for inconsistencies in rulesList and weightList. For example: they need to have the same size...
+		int[] res = {0,0};	// FP and FN vector
 		
 		// Load ham.log file from path and check for FP
 		try	{
@@ -92,7 +92,6 @@ public class Evaluator {
 			    }
 			    aux = br.readLine();
 			}
-			System.out.println("Found " + res[0] + " false positives in the current configuration.");
 			br.close();
 			
 		} catch (FileNotFoundException e1) {
@@ -119,7 +118,6 @@ public class Evaluator {
 			    }
 			    aux = br.readLine();
 			}
-			System.out.println("Found " + res[1] + " false negatives in the current configuration.");
 			br.close();
 			
 		} catch (FileNotFoundException e1) {
@@ -128,6 +126,7 @@ public class Evaluator {
 		} catch (IOException e1) {
 		}
 		
+		System.out.println("[Evaluator] Found " + res[0] + "FP and " + res[1] + "FN in the current configuration.");
 		return res;
 	}
 }

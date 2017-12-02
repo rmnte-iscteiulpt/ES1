@@ -73,6 +73,9 @@ public class FileLocationPanel extends JPanel	{
 		}	else	{
 			return "";
 		}
-		
+	}
+	
+	public void setTextField(String text)	{
+		path.setText(text);
 	}
 }

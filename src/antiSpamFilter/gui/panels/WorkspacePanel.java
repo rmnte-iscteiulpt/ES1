@@ -14,9 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import antiSpamFilter.datastore.RulesConfigList;
 import antiSpamFilter.gui.MainWindow;
 import antiSpamFilter.gui.panes.TablePane;
-import antiSpamFilter.misc.RulesConfigList;
 
 /**
  * @author skner

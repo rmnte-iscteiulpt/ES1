@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import antiSpamFilter.datastore.RulesConfigList;
 import antiSpamFilter.gui.MainWindow;
 import antiSpamFilter.gui.panels.WorkspacePanel;
-import antiSpamFilter.misc.RulesConfigList;
 
 /**
  * @author skner

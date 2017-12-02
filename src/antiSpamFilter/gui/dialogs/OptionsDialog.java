@@ -3,14 +3,11 @@ package antiSpamFilter.gui.dialogs;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
-
 import antiSpamFilter.gui.MainWindow;
 import antiSpamFilter.gui.panels.FileLocationPanel;
-import antiSpamFilter.tools.RulesUtility;
+import antiSpamFilter.tools.FileBrowser;
 
 @SuppressWarnings("serial")
 
@@ -27,11 +24,18 @@ public class OptionsDialog extends JDialog	{
 	private JButton applyButton;
 	private JButton cancelButton;
 	private JButton okButton;
+	private JButton rulesBrowseButton;
+	private JButton spamBrowseButton;
+	private JButton hamBrowseButton;
 	
 	private FileLocationPanel rulesPanel;
 	private FileLocationPanel spamPanel;
 	private FileLocationPanel hamPanel;
 
+	private FileBrowser rulesBrowser;
+	private FileBrowser spamBrowser;
+	private FileBrowser hamBrowser;
+	
 	/**
 	 * Constructor
 	 */
@@ -50,25 +54,40 @@ public class OptionsDialog extends JDialog	{
 	 * Makes the dialog exist, creating its layout
 	 */
 	private void setupLayout()	{	
-		// TODO Add variables for width and height
-		// Buttons
-		int buttonsX = 162;
-		int buttonsY = 300;
-		// Initialize buttons
+		// Buttons variables
+		int buttonWidth = 89;
+		int buttonHeight = 25;
+		int controlButtonsX = 162;
+		int controlButtonsY = 300;
+		int browseButtonsX = 365;
+		int browseButtonsY = 34;
+		
+		// Control buttons
 		applyButton = new JButton("Apply");
-		applyButton.setBounds(buttonsX + 198, buttonsY, 89, 25);
+		applyButton.setBounds(controlButtonsX + 198, controlButtonsY, buttonWidth, buttonHeight);
 		add(applyButton);
 		cancelButton = new JButton("Cancel");
-		cancelButton.setBounds(buttonsX + 99, buttonsY, 89, 25);
+		cancelButton.setBounds(controlButtonsX + 99, controlButtonsY, buttonWidth, buttonHeight);
 		add(cancelButton);
 		okButton = new JButton("Ok");
-		okButton.setBounds(buttonsX, buttonsY, 89, 25);
+		okButton.setBounds(controlButtonsX, controlButtonsY, buttonWidth, buttonHeight);
 		add(okButton);
 		
-		// File location panels
+		// Browser Buttons 
+		rulesBrowseButton = new JButton("Browse");
+		rulesBrowseButton.setBounds(browseButtonsX, browseButtonsY, buttonWidth, buttonHeight);
+		add(rulesBrowseButton);
+		spamBrowseButton = new JButton("Browse");
+		spamBrowseButton.setBounds(browseButtonsX, browseButtonsY + 100, buttonWidth, buttonHeight);
+		add(spamBrowseButton);
+		hamBrowseButton = new JButton("Browse");
+		hamBrowseButton.setBounds(browseButtonsX, browseButtonsY + 200, buttonWidth, buttonHeight);
+		add(hamBrowseButton);
+		
+		// File location panels variables
 		int panelWidth = 468;
 		int panelHeight = 100;
-		// Initialize panels
+		// File location panels
 		rulesPanel = new FileLocationPanel(new Rectangle(0, 0, panelWidth, panelHeight), "Rules.cf");
 		add(rulesPanel);
 		spamPanel = new FileLocationPanel(new Rectangle(0, panelHeight, panelWidth, panelHeight), "Spam.log");
@@ -81,7 +100,7 @@ public class OptionsDialog extends JDialog	{
 	 * Makes the dialog work
 	 */
 	private void setupFunctionality() {
-		// Add action listeners to the buttons
+		// Action listeners for the control buttons
 		applyButton.addActionListener(new ActionListener()	{  
             public void actionPerformed(ActionEvent e)  
             {  
@@ -92,6 +111,7 @@ public class OptionsDialog extends JDialog	{
             public void actionPerformed(ActionEvent e)  
             {  
             	// TODO Revert changes made, its memorizing what we typed etc...
+            	// Create backup of things and revert them here
                 setVisible(false); 
             }
         });  
@@ -102,9 +122,36 @@ public class OptionsDialog extends JDialog	{
                 setVisible(false); 
             }
         });
+		
+		// FileBrowsers setup
+		rulesBrowser = new FileBrowser("rules");
+		spamBrowser = new FileBrowser("spam");
+		hamBrowser = new FileBrowser("ham");
+		
+		// Action listeners for the browser buttons
+		rulesBrowseButton.addActionListener(new ActionListener()	{  
+            public void actionPerformed(ActionEvent e)  
+            {  
+            	rulesPanel.setTextField(rulesBrowser.getBrowsePath());
+            }
+        });
+		spamBrowseButton.addActionListener(new ActionListener()	{  
+            public void actionPerformed(ActionEvent e)  
+            {  
+            	spamPanel.setTextField(spamBrowser.getBrowsePath());
+            }
+        });
+		hamBrowseButton.addActionListener(new ActionListener()	{  
+            public void actionPerformed(ActionEvent e)  
+            {  
+            	hamPanel.setTextField(hamBrowser.getBrowsePath());
+            }
+        });
 	}
 	
-	// TODO Only rules.cf file works, implement spam and ham log files
+	/**
+	 * Applies the changes made to the file paths. Firstly it verifies which panel has changed the file path, then updates it if it has in fact been changed.
+	 */
 	private void apply()	{
 		if(rulesPanel.changed())	{
 			frame.getMainEngine().updateRulesUtility(rulesPanel.getFilePath());
@@ -119,5 +166,5 @@ public class OptionsDialog extends JDialog	{
 			System.out.println("Spam path updated.");
 		}
 	}
-
+	
 }

@@ -7,7 +7,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import antiSpamFilter.misc.RulesConfigList;
+import antiSpamFilter.datastore.RulesConfigList;
 
 /**
  * @author rmnte-iscteiulpt

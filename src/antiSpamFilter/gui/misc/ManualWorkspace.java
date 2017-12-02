@@ -10,9 +10,10 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
+
+import antiSpamFilter.datastore.RulesConfigList;
 import antiSpamFilter.gui.MainWindow;
 import antiSpamFilter.gui.panels.WorkspacePanel;
-import antiSpamFilter.misc.RulesConfigList;
 
 /**
  * @author skner

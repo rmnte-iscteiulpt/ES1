@@ -3,7 +3,7 @@ package antiSpamFilter.engines;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import antiSpamFilter.misc.RulesConfigList;
+import antiSpamFilter.datastore.RulesConfigList;
 
 /**
  * @author skner

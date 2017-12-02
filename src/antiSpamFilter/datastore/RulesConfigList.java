@@ -1,4 +1,4 @@
-package antiSpamFilter.misc;
+package antiSpamFilter.datastore;
 
 import java.util.ArrayList;
 
@@ -12,6 +12,11 @@ public class RulesConfigList {
 
 	private ArrayList<String> rulesList;
 	private ArrayList<Float> weightList;
+	
+	/*
+	 * TODO 
+	 * Add export and import functionality
+	 */
 	
 	public RulesConfigList(ArrayList<String> list) {
 		rulesList = list;
