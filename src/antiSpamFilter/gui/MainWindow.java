@@ -15,12 +15,15 @@ import antiSpamFilter.gui.misc.ManualWorkspace;
 import antiSpamFilter.tools.LoadingTimer;
 
 @SuppressWarnings("serial")
+/**
+ * This is the main window, the window the user will see most of the time. It contains most of the GUI elements and buttons to assist the user in working with the
+ * configuration and the algorithm
+ * 
+ * @author rmnte-iscteiulpt
+ *
+ */
 public class MainWindow extends JFrame {
-	
-	/*
-	 * TODO Known Bugs:
-	 * 
-	 */
+
 	private JButton optionsButton;
 	private JButton saveButton;
 	private AlgorithmWorkspace autoPanel;
@@ -28,6 +31,10 @@ public class MainWindow extends JFrame {
 	
 	private MainEngine mainEngine;
 	
+	/**
+	 * Constructor
+	 * @param me Main Engine to link with this class
+	 */
 	public MainWindow(MainEngine me)	{
 		super("Anti Spam Filter Configuration");
 		mainEngine = me;
@@ -36,7 +43,7 @@ public class MainWindow extends JFrame {
 	}
 
 	/**
-	 * Creates the frame and renders it
+	 * Creates the window, setting up the layout
 	 */
 	private void setupFrame()	{
 		LoadingTimer timer = new LoadingTimer();
@@ -76,6 +83,9 @@ public class MainWindow extends JFrame {
 		System.out.println("Window loaded in " + timer.getElapsedTime() + "ms.");
 	}
 
+	/**
+	 * Setup the manual workspace panel
+	 */
 	private void setupManualPanel() {
 		manualPanel = new ManualWorkspace(new Rectangle(10, 31, 674, 200), this, mainEngine.getManualEngine().getConfigList());
 		add(manualPanel);
@@ -86,6 +96,9 @@ public class MainWindow extends JFrame {
 		manualText.setFont(new Font("Tahoma", Font.PLAIN, 16));
 	}
 	
+	/**
+	 * Setup the automatic workspace panel
+	 */
 	private void setupAutomaticPanel() {
 		autoPanel = new AlgorithmWorkspace(new Rectangle(10, 264, 674, 200), this, mainEngine.getAutoEngine().getConfigList());
 		add(autoPanel);
@@ -96,11 +109,18 @@ public class MainWindow extends JFrame {
 		automaticText.setBounds(11, 242, 674, 20);
 	}
 	
+	/**
+	 * Links the engines and respective interfaces
+	 */
 	private void setupObserverLinks() {
 		mainEngine.getManualEngine().addObserver(manualPanel);
 		mainEngine.getAutoEngine().addObserver(autoPanel);
 	}
 
+	/**
+	 * Getter for the main engine
+	 * @return The main engine
+	 */
 	public MainEngine getMainEngine() {
 		return mainEngine;
 	}

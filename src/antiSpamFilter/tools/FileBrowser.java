@@ -7,12 +7,19 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
 @SuppressWarnings("serial")
+/**
+ * Dialog window that will be used to help the user locate configuration files
+ * @author rmnte-iscteiulpt
+ *
+ */
 public class FileBrowser extends JFileChooser {
 
-	
+	/**
+	 * Constructor
+	 * @param file File that the FileBrowser should help locate
+	 */
 	public FileBrowser(String file) {
 		super();
-		
 		setCurrentDirectory(new File(System.getProperty("user.dir") + "\\AntiSpamConfigurationForLeisureMailbox\\"));
 		String fileFilterDescription = "";
 		String fileExtension = "";
@@ -33,6 +40,10 @@ public class FileBrowser extends JFileChooser {
 		
 	}
 	
+	/**
+	 * Method that will return the path chosen by the user after using the dialog
+	 * @return Path chosen by the user
+	 */
 	public String getBrowsePath()	{
 		int returnValue = showOpenDialog(null);
 		String path = "";

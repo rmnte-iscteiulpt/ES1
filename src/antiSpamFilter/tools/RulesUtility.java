@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
+ * The class that holds the rules list, including the file path
  * @author skner
  *
  */
@@ -17,10 +18,17 @@ public class RulesUtility {
 	private String rulesPath;
 	private ArrayList<String> rulesList;
 
+	/**
+	 * Default constructor
+	 */
 	public RulesUtility()	{
 		this("");
 	}
 	
+	/**
+	 * Constructor
+	 * @param rulesPath Specific path for the rules.cf file
+	 */
 	public RulesUtility(String rulesPath) {
 		//LoadingTimer timer = new LoadingTimer(); // Timer debug
 		defaultRulesPath = System.getProperty("user.dir") + "\\" + "AntiSpamConfigurationForLeisureMailbox\\rules.cf";
@@ -28,6 +36,9 @@ public class RulesUtility {
 		//System.out.println("File read and sorted in " + timer.getElapsedTime() + "ms."); // Timer debug
 	}
 
+	/**
+	 * Loads the rules from the file into memory
+	 */
 	public void loadRules()	{
 		rulesList = readFile();
 		if(rulesList == null)	{	// This means the file was not found or there was an io exception
@@ -37,6 +48,10 @@ public class RulesUtility {
 		}
 	}
 	
+	/**
+	 * Updates the rules list, based on a new path
+	 * @param rulesPath The new path
+	 */
 	public void updatePath(String rulesPath)	{
 		if(rulesPath.equals(""))	{
 			this.rulesPath = defaultRulesPath;
@@ -47,6 +62,10 @@ public class RulesUtility {
 		loadRules();
 	}
 
+	/**
+	 * Reads the rules.cf file, returning the list of rules
+	 * @return The new list containing the rules
+	 */
 	private ArrayList<String> readFile()	{
 		try	{
 			ArrayList<String> ruleList = new ArrayList<String>();
@@ -66,6 +85,10 @@ public class RulesUtility {
 		return null;
 	}
 	
+	/**
+	 * Getter for the current rules list
+	 * @return The rules list
+	 */
 	public ArrayList<String> getRulesList()	{
 		return rulesList;
 	}

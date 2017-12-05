@@ -1,6 +1,3 @@
-/**
- * 
- */
 package antiSpamFilter.gui.panels;
 
 import java.awt.Font;
@@ -13,11 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 /**
+ * This is a panel that is used to locate a configuration file. This means either the rules.cf, ham.log or spam.log files.
  * @author skner
  *
  */
-@SuppressWarnings("serial")
 public class FileLocationPanel extends JPanel	{
 	
 	private JLabel label;
@@ -25,6 +23,11 @@ public class FileLocationPanel extends JPanel	{
 	private JCheckBox checkBox;
 	private String oldPath;
 	
+	/**
+	 * Constructor
+	 * @param bounds Size and position of the panel
+	 * @param fileName Represents the file that the path should point to.
+	 */
 	public FileLocationPanel(Rectangle bounds, String fileName)	{
 		setBounds(bounds);
 		setLayout(null);
@@ -47,6 +50,9 @@ public class FileLocationPanel extends JPanel	{
 		setupFunctionality();
 	}
 
+	/**
+	 * Makes the panel work
+	 */
 	private void setupFunctionality() {
 		checkBox.addActionListener(new ActionListener()	{  
             public void actionPerformed(ActionEvent e)  
@@ -57,6 +63,10 @@ public class FileLocationPanel extends JPanel	{
 		oldPath = path.getText();	// Needs to be ""
 	}
 	
+	/**
+	 * Serves as a token to make sure something was changed in the configuration so it can be applied
+	 * @return True if the path changed since the last configuration, false otherwise
+	 */
 	public boolean changed()	{
 		if(!getFilePath().equals(oldPath))	{
 			oldPath = getFilePath();
@@ -67,6 +77,10 @@ public class FileLocationPanel extends JPanel	{
 
 	}
 	
+	/**
+	 * Getter for the file path
+	 * @return Respective file path
+	 */
 	public String getFilePath()	{
 		if(checkBox.isSelected())	{
 			return path.getText();
@@ -75,6 +89,10 @@ public class FileLocationPanel extends JPanel	{
 		}
 	}
 	
+	/**
+	 * Sets text displayed in the path box
+	 * @param text Text to be displayed in the path box
+	 */
 	public void setTextField(String text)	{
 		path.setText(text);
 	}

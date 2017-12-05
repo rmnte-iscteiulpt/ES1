@@ -1,6 +1,3 @@
-/**
- * 
- */
 package antiSpamFilter.gui.panels;
 
 import java.awt.Color;
@@ -18,17 +15,25 @@ import antiSpamFilter.datastore.RulesConfigList;
 import antiSpamFilter.gui.MainWindow;
 import antiSpamFilter.gui.panes.TablePane;
 
+@SuppressWarnings("serial")
 /**
+ * The panel that contains most of the working elements. This includes the table, evaluate buttons, results panel, etc...
  * @author skner
  *
  */
-@SuppressWarnings("serial")
 public class WorkspacePanel extends JPanel	{
 	
 	protected MainWindow mainWindow;
 	protected TablePane tablePane;
 	private JPanel resultsPanel;
 	
+	/**
+	 * Constructor
+	 * @param bounds Size and position of the panel
+	 * @param configList Initial configuration list to apply to the table
+	 * @param mainWindow The main frame where to insert this panel in
+	 * @param editableWeights Makes the table editable or not
+	 */
 	public WorkspacePanel(Rectangle bounds, RulesConfigList configList, MainWindow mainWindow, boolean editableWeights)	{
 		tablePane = new TablePane(new Rectangle(10, 11, 249, 150), configList, editableWeights);
 		this.mainWindow = mainWindow;
@@ -39,11 +44,14 @@ public class WorkspacePanel extends JPanel	{
 		JLabel resultsText = new JLabel("Results");
 		add(resultsText);
 		resultsText.setBounds(330, 7, 100, 20);
-		//generateManualLayout();
 		add(resultsPanel = setupResultsPanel());
 		resultsPanel.setBounds(280, 27, 150, 100);
 	}
 
+	/**
+	 * Sets up the results panel
+	 * @return The results panel
+	 */
 	private JPanel setupResultsPanel() {
 		resultsPanel = new JPanel();
 		resultsPanel.setLayout(null);
@@ -85,6 +93,10 @@ public class WorkspacePanel extends JPanel	{
 		return resultsPanel;
 	}
 	
+	/**
+	 * Updates the table with a new RulesConfigList configuration
+	 * @param arg New configuration list
+	 */
 	public void updateTableContent(RulesConfigList arg)	{
 		tablePane.updateContent(arg);
 	}

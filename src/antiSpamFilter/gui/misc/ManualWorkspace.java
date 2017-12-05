@@ -1,6 +1,3 @@
-/**
- * 
- */
 package antiSpamFilter.gui.misc;
 
 import java.awt.Rectangle;
@@ -16,6 +13,7 @@ import antiSpamFilter.gui.MainWindow;
 import antiSpamFilter.gui.panels.WorkspacePanel;
 
 /**
+ * JPanel that controls and updates the manual engine, being linked with it using the observer-observable class
  * @author skner
  *
  */
@@ -29,8 +27,10 @@ public class ManualWorkspace extends WorkspacePanel implements Observer	{
 	private JButton importButton;
 	
 	/**
-	 * 
-	 * @param bounds
+	 * Constructor
+	 * @param bounds Size and position of the panel
+	 * @param mainWindow A pointer to the main window
+	 * @param configList The RulesConfigList for the manual engine
 	 */
 	public ManualWorkspace(Rectangle bounds, MainWindow mainWindow, RulesConfigList configList) {
 		super(bounds, configList, mainWindow, true);
@@ -38,6 +38,9 @@ public class ManualWorkspace extends WorkspacePanel implements Observer	{
 		setupFunctionality();
 	}
 	
+	/**
+	 * Generates the manual layout
+	 */
 	private void generateManualLayout() {
 		// Buttons
 		resetButton = new JButton("Reset");
@@ -57,6 +60,9 @@ public class ManualWorkspace extends WorkspacePanel implements Observer	{
 		importButton.setBounds(280, 138, 150, 25);
 	}
 	
+	/**
+	 * Makes the panel work
+	 */
 	private void setupFunctionality()	{
 		resetButton.addActionListener(new ActionListener()	{  
             public void actionPerformed(ActionEvent e)  
@@ -84,15 +90,24 @@ public class ManualWorkspace extends WorkspacePanel implements Observer	{
 		updateTableContent((RulesConfigList)arg);
 	}
 
+	/**
+	 * Reset button functionality: Resets the weights displayed on the table, sending them to the manual engine
+	 */
 	public void reset()	{
 		mainWindow.getMainEngine().getManualEngine().resetWeights();
 	}
 	
+	/**
+	 * Apply button functionality: Applies the changes made to the buffer JTable, sending it to the manual engine
+	 */
 	public void apply()	{
 		tablePane.applyChanges();
 		mainWindow.getMainEngine().getManualEngine().updateWeights(tablePane.getWeightList());
 	}
 	
+	/**
+	 * Discards changes made to the buffer
+	 */
 	public void discard()	{
 		tablePane.discardChanges();
 	}

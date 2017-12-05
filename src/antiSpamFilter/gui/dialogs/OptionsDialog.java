@@ -11,15 +11,15 @@ import antiSpamFilter.tools.FileBrowser;
 
 @SuppressWarnings("serial")
 
-/** 
- * @author skner
- *
+/**
  * This is the options dialog window, opens up when the user presses the option button on the main window. 
  * This window will hold most if not every option to configure the program.
+ * 
+ * @author rmnte-iscteiulpt
  */
 public class OptionsDialog extends JDialog	{
 	
-	private MainWindow frame;//
+	private MainWindow frame;
 	
 	private JButton applyButton;
 	private JButton cancelButton;

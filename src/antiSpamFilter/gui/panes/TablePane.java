@@ -9,17 +9,24 @@ import javax.swing.table.DefaultTableModel;
 
 import antiSpamFilter.datastore.RulesConfigList;
 
+@SuppressWarnings("serial")
 /**
- * @author rmnte-iscteiulpt
+ * A pane that contains a set of configurations for a JTable, to be displayed in the workspaces
+ * @author skner
  *
  */
-@SuppressWarnings("serial")
 public class TablePane extends JScrollPane	{
 
 	private boolean editable;
 	private JTable table;	// This table holds temporary values. The values used in the engine are from the weightList.
 	private ArrayList<Float> weightList;	// This arraylist holds the permanent values, used by the engine.
 
+	/**
+	 * Constructor
+	 * @param bounds Size and position of the pane
+	 * @param configList Configuration list to apply to the JTable
+	 * @param editable Makes the weights column editable or not
+	 */
 	public TablePane(Rectangle bounds, RulesConfigList configList, boolean editable)	{
 		super();
 		table = new JTable();	// TODO Show decimal places in JTable? Render Format JTable boolean...
@@ -30,7 +37,10 @@ public class TablePane extends JScrollPane	{
 		updateWeightList();
 	}
 	
-	// TODO Link the weightList with the respective engine, by changing the values in the rulesconfiglist variable. 
+	/**
+	 * Updates the content of the JTable with a new configuration list
+	 * @param arg The configuration list
+	 */
 	public void updateContent(RulesConfigList arg)	{
 		Object[][] o = new Object[arg.getRulesList().size()][2]; 
 		for(int i = 0; i<arg.getRulesList().size(); i++)	{
@@ -66,10 +76,9 @@ public class TablePane extends JScrollPane	{
 		table.getTableHeader().setReorderingAllowed(false);
 	}
 
-	public JTable getTable() {
-		return table;
-	}
-	
+	/**
+	 * Updates the weight list, copying values from the JTable, serving as a data buffer
+	 */
 	public void updateWeightList()	{
 		boolean rangeExceeded = false;
 		weightList = new ArrayList<Float>();
@@ -92,14 +101,32 @@ public class TablePane extends JScrollPane	{
 		}
 	}
 	
+	/**
+	 * Getter for the JTable, serving only as a buffer and visual display
+	 * @return The current JTable
+	 */
+	public JTable getTable() {
+		return table;
+	}
+	
+	/**
+	 * Getter for the weight list
+	 * @return The weight list
+	 */
 	public ArrayList<Float> getWeightList()	{
 		return weightList;
 	}
 	
+	/**
+	 * Applies changes, copying the values from the JTable to the weightList
+	 */
 	public void applyChanges()	{
 		updateWeightList();
 	}
 	
+	/**
+	 * Cancels changes, copying the values from the weightList to the JTable, basically reverting them to the most recent saved configuration
+	 */
 	public void discardChanges()	{
 		for(int i = 0; i<table.getRowCount(); i++)	{
 			table.setValueAt(weightList.get(i), i, 1);

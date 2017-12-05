@@ -11,7 +11,8 @@ import java.io.IOException;
 import antiSpamFilter.datastore.RulesConfigList;
 
 /**
- * @author skner
+ * This class is responsible for evaluating configurations, checking the spam and ham log files, and returning the respective FP and FN solutions for a give configuration
+ * @author rmnte-iscteiulpt
  *
  */
 public class Evaluator {
@@ -22,32 +23,30 @@ public class Evaluator {
 	private String spamPath;
 	
 	/*
-	 * TODO
-	 * How will the evaluator work
-	 * First grabs the spam and ham files
-	 * After that for each line (example) will see what rules are applied. We should search the rules in the config file, and sum their weights.
-	 * 
-	 * Safe message found in spam:	FN++;
-	 * Spam message found in ham:	FP++;
-	 * 
 	 * Notes and values:
 	 * 
-	 * weight range: -5 to 5
+	 * Weight range: -5 to 5
 	 * 
-	 * What to do with the results:
+	 * Results handling:
 	 * sum>5 = spam
-	 * sum<5 = not spam
+	 * sum<5 = safe
 	 * 
 	 * FP (false positives) means that a message was considered spam, when it was safe
 	 * FN (false negatives) means that a message was considered safe, when it was spam
-	 * 
-	 * Rules+Weights algorithm - 
 	 */
 	
+	/**
+	 * Default constructor, creating a evaluator using default log files
+	 */
 	public Evaluator() {
 		this("","");
 	}
 	
+	/**
+	 * Creates a evaluator with specific log files
+	 * @param hamPath The path for the ham.log file
+	 * @param spamPath The path for the spam.log file
+	 */
 	public Evaluator(String hamPath, String spamPath) {
 		defaultHamPath = System.getProperty("user.dir") + "\\" + "AntiSpamConfigurationForLeisureMailbox\\ham.log";
 		defaultSpamPath = System.getProperty("user.dir") + "\\" + "AntiSpamConfigurationForLeisureMailbox\\spam.log";
@@ -55,6 +54,10 @@ public class Evaluator {
 		updateSpamPath(spamPath);
 	}
 
+	/**
+	 * Updates the ham.log file path
+	 * @param hamPath New path
+	 */
 	public void updateHamPath(String hamPath) {
 		if(hamPath.equals(""))	{
 			this.hamPath = defaultHamPath;
@@ -63,6 +66,10 @@ public class Evaluator {
 		}
 	}
 	
+	/**
+	 * Updates the ham.log file path
+	 * @param spamPath New path
+	 */
 	public void updateSpamPath(String spamPath) {
 		if(spamPath.equals(""))	{
 			this.spamPath = defaultSpamPath;
@@ -71,6 +78,11 @@ public class Evaluator {
 		}
 	}
 	
+	/**
+	 * This method will be given a configuration and return the respective results
+	 * @param list Configuration list, containing rules and one weight for each rule
+	 * @return An integer array[2] containing the FP and FN results respectively
+	 */
 	public int[] evaluate(RulesConfigList list)	{
 		int[] res = {0,0};	// FP and FN vector
 		
