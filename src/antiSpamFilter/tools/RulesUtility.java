@@ -92,4 +92,5 @@ public class RulesUtility {
 	public ArrayList<String> getRulesList()	{
 		return rulesList;
 	}
+	
 }

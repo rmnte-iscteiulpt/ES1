@@ -29,9 +29,12 @@ public class FileBrowser extends JFileChooser {
 		}	else	if(file == "spam")	{
 			fileFilterDescription = "Spam.log File";
 			fileExtension = "log";
-		}	else	{
+		}	else	if(file == "ham")	{
 			fileFilterDescription = "Ham.log File";
 			fileExtension = "log";
+		}	else	if(file == "cfg")	{
+			fileFilterDescription = "Configuration file";
+			fileExtension = "cfg";
 		}
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(fileFilterDescription, fileExtension);
 		setDialogTitle("Choose custom " + file + " file");
@@ -49,6 +52,23 @@ public class FileBrowser extends JFileChooser {
 		String path = "";
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			path = getSelectedFile().getAbsolutePath();
+		}
+		return path;
+	}
+	
+	/**
+	 * 
+	 * @return The path of which the file should be saved
+	 */
+	public String getSavePath()	{
+		setDialogTitle("Choose save location");
+		int returnValue = showSaveDialog(null);
+		String path = "";
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			path = getSelectedFile().getAbsolutePath();
+			if(!path.endsWith(".cfg")) {
+				path += ".cfg";
+			}
 		}
 		return path;
 	}

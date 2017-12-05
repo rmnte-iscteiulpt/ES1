@@ -1,5 +1,11 @@
 package antiSpamFilter.datastore;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 /**
@@ -76,21 +82,53 @@ public class RulesConfigList {
 	}
 
 	/**
-	 * Getter for the rule list
-	 * @return The rule list
+	 * Exports current configuration list to a .cfg file on a specific folder
+	 * @param path Path to the file that the file needs to be saved.
+	 * @throws UnsupportedEncodingException 
+	 * @throws FileNotFoundException 
 	 */
-	public ArrayList<String> getRulesList() {
-		return rulesList;
-	}
+	public void exportTo(String path) throws FileNotFoundException, UnsupportedEncodingException	{
 
+		PrintWriter writer = new PrintWriter(path, "UTF-8");
+		for(int i = 0; i<rulesList.size(); i++)	{
+			writer.println(rulesList.get(i) + " " + weightList.get(i));
+		}
+		writer.close();
+	}
+	
 	/**
-	 * Getter for the weight list
-	 * @return The weight list
+	 * Imports a configuration list from a given .cfg file. It verifies if the given list matches the list stored in the RulesUtility class.
+	 * @param path The path pointing to the .cfg file
+	 * @throws IOException 
 	 */
-	public ArrayList<Float> getWeightList() {
-		return weightList;
+	public void importFrom(String path) throws IOException	{
+		ArrayList<String> newRuleList = new ArrayList<String>();
+		ArrayList<Float> newWeightList = new ArrayList<Float>();
+		BufferedReader br = new BufferedReader(new FileReader(path));
+		String buffer = br.readLine();
+		String[] args = {};
+	    String rule = "";
+	    float weight = 0f;
+	    while (buffer != null) {
+	    	args = buffer.split(" ");
+	    	rule = args[0];
+	    	weight = Float.parseFloat(args[1]);
+	    	if(!rulesList.contains(rule))	{
+	        	System.out.println("Configuration file is using different rules. File import unsuccessful.");
+	        	return;
+	        }	else	{
+	        	newRuleList.add(rule);
+	        	newWeightList.add(weight);
+	        }
+	        buffer = br.readLine();
+	    }
+	    br.close();
+	    rulesList = newRuleList;
+	    weightList = newWeightList;
+	    System.out.println("Configuration file imported successfully.");
+	    // TODO Update JTable with new values
 	}
-
+	
 	/**
 	 * Verifies errors between rule and weight lists
 	 */
@@ -116,5 +154,21 @@ public class RulesConfigList {
 			return 0f;
 		}
 		return weightList.get(rulesList.indexOf(rule));
+	}
+	
+	/**
+	 * Getter for the rule list
+	 * @return The rule list
+	 */
+	public ArrayList<String> getRulesList() {
+		return rulesList;
+	}
+
+	/**
+	 * Getter for the weight list
+	 * @return The weight list
+	 */
+	public ArrayList<Float> getWeightList() {
+		return weightList;
 	}
 }

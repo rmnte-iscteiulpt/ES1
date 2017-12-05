@@ -3,6 +3,9 @@ package antiSpamFilter.gui.misc;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -11,6 +14,7 @@ import javax.swing.JButton;
 import antiSpamFilter.datastore.RulesConfigList;
 import antiSpamFilter.gui.MainWindow;
 import antiSpamFilter.gui.panels.WorkspacePanel;
+import antiSpamFilter.tools.FileBrowser;
 
 /**
  * JPanel that controls and updates the manual engine, being linked with it using the observer-observable class
@@ -52,10 +56,10 @@ public class ManualWorkspace extends WorkspacePanel implements Observer	{
 		applyButton = new JButton("Apply");
 		add(applyButton);
 		applyButton.setBounds(188, 168, 70, 25);
-		JButton exportButton = new JButton("Export Configuration");
+		exportButton = new JButton("Export Configuration");
 		add(exportButton);
 		exportButton.setBounds(280, 168, 150, 25);
-		JButton importButton = new JButton("Import Configuration");
+		importButton = new JButton("Import Configuration");
 		add(importButton);
 		importButton.setBounds(280, 138, 150, 25);
 	}
@@ -81,6 +85,36 @@ public class ManualWorkspace extends WorkspacePanel implements Observer	{
             {  
             	// TODO Add a change token for confirmation. Optional
                 apply();
+            }
+        });
+		
+		exportButton.addActionListener(new ActionListener()	{  
+            public void actionPerformed(ActionEvent e)  
+            {  
+            	FileBrowser fb = new FileBrowser("cfg");
+            	try {
+					mainWindow.getMainEngine().getManualEngine().getConfigList().exportTo(fb.getSavePath());
+				} catch (FileNotFoundException e1) {
+					System.err.println("Export folder doesn't exist. File export unsuccessful.");
+					e1.printStackTrace();
+				} catch (UnsupportedEncodingException e1) {
+					System.err.println("Enconding not supported. File export unsuccessful.");
+					e1.printStackTrace();
+				}
+            	updateTableContent(mainWindow.getMainEngine().getManualEngine().getConfigList());
+            }
+        });
+		importButton.addActionListener(new ActionListener()	{  
+            public void actionPerformed(ActionEvent e)  
+            {  
+            	FileBrowser fb = new FileBrowser("cfg");
+            	try {
+					mainWindow.getMainEngine().getManualEngine().getConfigList().importFrom(fb.getBrowsePath());
+				} catch (IOException e1) {
+					System.err.println("File IO exception. File import unsuccessful.");
+					e1.printStackTrace();
+				}
+            	updateTableContent(mainWindow.getMainEngine().getManualEngine().getConfigList());
             }
         });
 	}
