@@ -7,8 +7,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import antiSpamFilter.datastore.RulesConfigList;
+import antiSpamFilter.main.Main;
 
 /**
  * This class is responsible for evaluating configurations, checking the spam and ham log files, and returning the respective FP and FN solutions for a give configuration
@@ -17,8 +19,7 @@ import antiSpamFilter.datastore.RulesConfigList;
  */
 public class Evaluator {
 
-	private String defaultHamPath;
-	private String defaultSpamPath;
+	
 	private String hamPath;
 	private String spamPath;
 	
@@ -48,8 +49,7 @@ public class Evaluator {
 	 * @param spamPath The path for the spam.log file
 	 */
 	public Evaluator(String hamPath, String spamPath) {
-		defaultHamPath = System.getProperty("user.dir") + "\\" + "AntiSpamConfigurationForLeisureMailbox\\ham.log";
-		defaultSpamPath = System.getProperty("user.dir") + "\\" + "AntiSpamConfigurationForLeisureMailbox\\spam.log";
+		
 		updateHamPath(hamPath);
 		updateSpamPath(spamPath);
 	}
@@ -60,7 +60,7 @@ public class Evaluator {
 	 */
 	public void updateHamPath(String hamPath) {
 		if(hamPath.equals(""))	{
-			this.hamPath = defaultHamPath;
+			this.hamPath = Main.defaultHamPath;
 		}	else	{
 			this.hamPath = hamPath;
 		}
@@ -72,12 +72,13 @@ public class Evaluator {
 	 */
 	public void updateSpamPath(String spamPath) {
 		if(spamPath.equals(""))	{
-			this.spamPath = defaultSpamPath;
+			this.spamPath = Main.defaultSpamPath;
 		}	else	{
 			this.spamPath = spamPath;
 		}
 	}
-	
+
+
 	/**
 	 * This method will be given a configuration and return the respective results
 	 * @param list Configuration list, containing rules and one weight for each rule
@@ -88,7 +89,12 @@ public class Evaluator {
 		
 		// Load ham.log file from path and check for FP
 		try	{
-			BufferedReader br = new BufferedReader(new FileReader(hamPath));
+			BufferedReader br;
+			if(hamPath == Main.defaultHamPath)	{
+				br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(hamPath)));
+			}	else	{
+				br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "/src" + hamPath));
+			}
 			String aux = br.readLine();
 			String[] args = null;
 			while(aux != null)	{
@@ -114,7 +120,12 @@ public class Evaluator {
 		
 		// Load spam.log file from path and check for FN
 		try	{
-			BufferedReader br = new BufferedReader(new FileReader(spamPath));
+			BufferedReader br;
+			if(spamPath == Main.defaultSpamPath)	{
+				br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(spamPath)));
+			}	else	{
+				br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "/src" + spamPath));
+			}
 			String aux = br.readLine();
 			String[] args = null;
 			while(aux != null)	{
@@ -125,7 +136,7 @@ public class Evaluator {
 			    	sum+= list.getRuleWeight(args[i]);
 			    }
 			    // Increments the FN if it found safe messages in the spam file.
-			    if(sum<5)	{
+			    if(sum<=5)	{
 			    	res[1]++;
 			    }
 			    aux = br.readLine();
@@ -138,7 +149,7 @@ public class Evaluator {
 		} catch (IOException e1) {
 		}
 		
-		System.out.println("[Evaluator] Found " + res[0] + "FP and " + res[1] + "FN in the current configuration.");
+		//System.out.println("[Evaluator] Found " + res[0] + "FP and " + res[1] + "FN in the current configuration.");
 		return res;
 	}
 }

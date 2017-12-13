@@ -49,11 +49,10 @@ public class FileBrowser extends JFileChooser {
 	 */
 	public String getBrowsePath()	{
 		int returnValue = showOpenDialog(null);
-		String path = "";
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			path = getSelectedFile().getAbsolutePath();
+			return getSelectedFile().getAbsolutePath();
 		}
-		return path;
+		return null;
 	}
 	
 	/**
@@ -63,7 +62,7 @@ public class FileBrowser extends JFileChooser {
 	public String getSavePath()	{
 		setDialogTitle("Choose save location");
 		int returnValue = showSaveDialog(null);
-		String path = "";
+		String path = null;
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			path = getSelectedFile().getAbsolutePath();
 			if(!path.endsWith(".cfg")) {

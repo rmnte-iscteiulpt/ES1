@@ -61,7 +61,7 @@ public class ManualWorkspace extends WorkspacePanel implements Observer	{
 		exportButton.setBounds(280, 168, 150, 25);
 		importButton = new JButton("Import Configuration");
 		add(importButton);
-		importButton.setBounds(280, 138, 150, 25);
+		importButton.setBounds(280, 134, 150, 25);
 	}
 	
 	/**
@@ -87,21 +87,34 @@ public class ManualWorkspace extends WorkspacePanel implements Observer	{
                 apply();
             }
         });
+		JButton evaluateButton = new JButton("Evaluate");
+		getResultsPanel().add(evaluateButton);
+		evaluateButton.setBounds(30, 65, 90, 25);
+		evaluateButton.addActionListener(new ActionListener()	{  
+            public void actionPerformed(ActionEvent e)  
+            {  
+            	int res[] = getMainWindow().getMainEngine().getEvaluator().evaluate(getMainWindow().getMainEngine().getManualEngine().getConfigList());
+            	updateResults(res);
+            }
+        });
 		
 		exportButton.addActionListener(new ActionListener()	{  
             public void actionPerformed(ActionEvent e)  
             {  
             	FileBrowser fb = new FileBrowser("cfg");
             	try {
-					mainWindow.getMainEngine().getManualEngine().getConfigList().exportTo(fb.getSavePath());
-				} catch (FileNotFoundException e1) {
+            		String path = fb.getSavePath();
+            		if(path!= null) {
+            			getMainWindow().getMainEngine().getManualEngine().getConfigList().exportTo(path);
+            		}
+				} 	catch (FileNotFoundException e1) {
 					System.err.println("Export folder doesn't exist. File export unsuccessful.");
 					e1.printStackTrace();
-				} catch (UnsupportedEncodingException e1) {
+				} 	catch (UnsupportedEncodingException e1) {
 					System.err.println("Enconding not supported. File export unsuccessful.");
 					e1.printStackTrace();
 				}
-            	updateTableContent(mainWindow.getMainEngine().getManualEngine().getConfigList());
+            	updateTableContent(getMainWindow().getMainEngine().getManualEngine().getConfigList());
             }
         });
 		importButton.addActionListener(new ActionListener()	{  
@@ -109,12 +122,15 @@ public class ManualWorkspace extends WorkspacePanel implements Observer	{
             {  
             	FileBrowser fb = new FileBrowser("cfg");
             	try {
-					mainWindow.getMainEngine().getManualEngine().getConfigList().importFrom(fb.getBrowsePath());
+            		String path = fb.getBrowsePath();
+            		if(path!= null) {
+            			getMainWindow().getMainEngine().getManualEngine().getConfigList().importFrom(path);
+            		}
 				} catch (IOException e1) {
 					System.err.println("File IO exception. File import unsuccessful.");
 					e1.printStackTrace();
 				}
-            	updateTableContent(mainWindow.getMainEngine().getManualEngine().getConfigList());
+            	updateTableContent(getMainWindow().getMainEngine().getManualEngine().getConfigList());
             }
         });
 	}
@@ -128,22 +144,22 @@ public class ManualWorkspace extends WorkspacePanel implements Observer	{
 	 * Reset button functionality: Resets the weights displayed on the table, sending them to the manual engine
 	 */
 	public void reset()	{
-		mainWindow.getMainEngine().getManualEngine().resetWeights();
+		getMainWindow().getMainEngine().getManualEngine().resetWeights();
 	}
 	
 	/**
 	 * Apply button functionality: Applies the changes made to the buffer JTable, sending it to the manual engine
 	 */
 	public void apply()	{
-		tablePane.applyChanges();
-		mainWindow.getMainEngine().getManualEngine().updateWeights(tablePane.getWeightList());
+		getTablePane().applyChanges();
+		getMainWindow().getMainEngine().getManualEngine().updateWeights(getTablePane().getWeightList());
 	}
 	
 	/**
 	 * Discards changes made to the buffer
 	 */
 	public void discard()	{
-		tablePane.discardChanges();
+		getTablePane().discardChanges();
 	}
 
 }

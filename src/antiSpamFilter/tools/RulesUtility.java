@@ -4,8 +4,13 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import antiSpamFilter.main.Main;
 
 /**
  * The class that holds the rules list, including the file path
@@ -14,7 +19,10 @@ import java.util.Collections;
  */
 public class RulesUtility {
 
-	private String defaultRulesPath;
+	/*
+	 * TODO
+	 * Fix not updating the results panel. Whats going on?
+	 */
 	private String rulesPath;
 	private ArrayList<String> rulesList;
 
@@ -31,7 +39,6 @@ public class RulesUtility {
 	 */
 	public RulesUtility(String rulesPath) {
 		//LoadingTimer timer = new LoadingTimer(); // Timer debug
-		defaultRulesPath = System.getProperty("user.dir") + "\\" + "AntiSpamConfigurationForLeisureMailbox\\rules.cf";
 		updatePath(rulesPath);
 		//System.out.println("File read and sorted in " + timer.getElapsedTime() + "ms."); // Timer debug
 	}
@@ -54,7 +61,7 @@ public class RulesUtility {
 	 */
 	public void updatePath(String rulesPath)	{
 		if(rulesPath.equals(""))	{
-			this.rulesPath = defaultRulesPath;
+			this.rulesPath = Main.defaultRulesPath;
 		}	else	{
 			this.rulesPath = rulesPath;
 		}
@@ -69,7 +76,13 @@ public class RulesUtility {
 	private ArrayList<String> readFile()	{
 		try	{
 			ArrayList<String> ruleList = new ArrayList<String>();
-			BufferedReader br = new BufferedReader(new FileReader(rulesPath));
+			BufferedReader br;
+			if(rulesPath == Main.defaultRulesPath)	{
+				br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(rulesPath)));
+			}	else	{
+				br = new BufferedReader(new FileReader(rulesPath));
+				
+			}
 		    String line = br.readLine();
 		    while (line != null) {
 		        ruleList.add(line);

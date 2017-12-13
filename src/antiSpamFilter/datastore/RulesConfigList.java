@@ -19,11 +19,6 @@ public class RulesConfigList {
 	private ArrayList<String> rulesList;
 	private ArrayList<Float> weightList;
 	
-	/*
-	 * TODO 
-	 * Add export and import functionality
-	 */
-
 	/**
 	 * Constructor that takes a list of rules and applies default weight values to each one
 	 * @param list The list containing the rules
@@ -60,6 +55,13 @@ public class RulesConfigList {
 	public void updateRules(ArrayList<String> rulesList)	{
 		this.rulesList = rulesList;
 		resetWeights();
+	}
+	
+	public void updateWeights(double[] weightList)	{
+		this.weightList = new ArrayList<Float>();
+		for(int i = 0; i<weightList.length; i++)	{
+			this.weightList.add((float) weightList[i]);
+		}
 	}
 	
 	/**

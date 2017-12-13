@@ -6,49 +6,53 @@ import java.util.List;
 import org.uma.jmetal.problem.impl.AbstractDoubleProblem;
 import org.uma.jmetal.solution.DoubleSolution;
 
+import antiSpamFilter.datastore.RulesConfigList;
+import antiSpamFilter.tools.Evaluator;
+import antiSpamFilter.tools.RulesUtility;
+
+@SuppressWarnings("serial")
 public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 
-	  public AntiSpamFilterProblem() {
-	    // 10 variables (anti-spam filter rules) by default 
-	    this(10);
-	  }
+	private RulesConfigList rulesList;
+	
+	/*
+	 * TODO
+	 * Problem: Maximum and minimum values of index 0 are the same: 0.0
+	 * WTF FIX
+	 */
 
-	  public AntiSpamFilterProblem(Integer numberOfVariables) {
-	    setNumberOfVariables(numberOfVariables);
-	    setNumberOfObjectives(2);
-	    setName("AntiSpamFilterProblem");
+	public AntiSpamFilterProblem(RulesConfigList configList) {
+		rulesList = configList;
+		setNumberOfVariables(rulesList.getWeightList().size());
+		setNumberOfObjectives(2);
+		setName("AntiSpamFilterProblem");
 
-	    List<Double> lowerLimit = new ArrayList<>(getNumberOfVariables()) ;
-	    List<Double> upperLimit = new ArrayList<>(getNumberOfVariables()) ;
+		List<Double> lowerLimit = new ArrayList<>(getNumberOfVariables());
+		List<Double> upperLimit = new ArrayList<>(getNumberOfVariables());
 
-	    for (int i = 0; i < getNumberOfVariables(); i++) {
-	      lowerLimit.add(-5.0);
-	      upperLimit.add(5.0);
-	    }
-
-	    setLowerLimit(lowerLimit);
-	    setUpperLimit(upperLimit);
-	  }
-
-	  public void evaluate(DoubleSolution solution){
-	    double aux, xi, xj;
-	    double[] fx = new double[getNumberOfObjectives()];
-	    double[] x = new double[getNumberOfVariables()];
-	    for (int i = 0; i < solution.getNumberOfVariables(); i++) {
-	      x[i] = solution.getVariableValue(i) ;
-	    }
-
-	    fx[0] = 0.0;
-	    for (int var = 0; var < solution.getNumberOfVariables() - 1; var++) {
-		  fx[0] += Math.abs(x[0]); // Example for testing
-	    }
-	    
-	    fx[1] = 0.0;
-	    for (int var = 0; var < solution.getNumberOfVariables(); var++) {
-	    	fx[1] += Math.abs(x[1]); // Example for testing
-	    }
-
-	    solution.setObjective(0, fx[0]);
-	    solution.setObjective(1, fx[1]);
-	  }
+		for (int i = 0; i < getNumberOfVariables(); i++) {
+			lowerLimit.add(-5.0);
+			upperLimit.add(5.0);
+		}
+		setLowerLimit(lowerLimit);
+		setUpperLimit(upperLimit);
 	}
+
+	// Compare configuration vector with spam and ham, obtaining the FP and FN results
+	public void evaluate(DoubleSolution solution)	{
+		double[] weightBuffer = new double[getNumberOfVariables()];
+		for (int i = 0; i < solution.getNumberOfVariables(); i++) {
+			weightBuffer[i] = solution.getVariableValue(i);
+		}
+		rulesList.updateWeights(weightBuffer);
+		// TODO Make evaluator accept custom files
+		Evaluator evaluator = new Evaluator();
+		int[] resAux = evaluator.evaluate(rulesList);
+		double[] res = {(double)resAux[0], (double)resAux[1]};
+		//System.out.println("Array: " + rulesList.getWeightList());
+		//System.out.println("Results: " + res[0] + "," + res[1]);
+	    // Stores the results (FP and FN) in solution, seen by the algorithm
+	    solution.setObjective(0, res[0]);
+		solution.setObjective(1, res[1]);
+	}
+}

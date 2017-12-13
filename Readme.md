@@ -1,9 +1,10 @@
-Identificação da turma (ex: EIC1)
+Class: LIGE-PL
 
-Identificação do grupo (ex: Grupo 2)
+Group 113
 
-Identificação do número, nome e papel de cada membro do grupo (ex: 12345, José Silva, Scrum Master)
+Members:
+Rui Tomé, Nº 73553, Developer
 
-Identificação da variante do projeto desenvolvida (ex: AntiSpamConfigurationForProfessionalMailbox)
+Project Variant: AntiSpamConfigurationForLeisureMailbox
 
-Link para um vídeo no youtube com a demonstração da aplicação final desenvolvida (ex: http://...)
+Youtube software showcase: TBA
