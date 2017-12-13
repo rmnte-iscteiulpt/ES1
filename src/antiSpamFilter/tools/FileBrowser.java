@@ -6,6 +6,8 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
+import antiSpamFilter.main.Main;
+
 @SuppressWarnings("serial")
 /**
  * Dialog window that will be used to help the user locate configuration files
@@ -20,7 +22,18 @@ public class FileBrowser extends JFileChooser {
 	 */
 	public FileBrowser(String file) {
 		super();
-		setCurrentDirectory(new File(System.getProperty("user.dir") + "\\AntiSpamConfigurationForLeisureMailbox\\"));
+		
+		// Check if directory exists, if not, creates it. If it cant due to security reasons, it will use the user's documents folder.
+		if (!new File(Main.defaultExportPath).exists()) {
+		    try{
+		    	new File(Main.defaultExportPath).mkdir();
+		    } 
+		    catch(SecurityException se){
+		    	System.out.println("hey");
+		    }        
+		}
+		
+		setCurrentDirectory(new File(Main.defaultExportPath));
 		String fileFilterDescription = "";
 		String fileExtension = "";
 		if(file == "rules")	{

@@ -33,6 +33,7 @@ public class AutomaticEngine extends Observable	{
 	 */
 	public AutomaticEngine(ArrayList<String> list)	{
 		configList = new RulesConfigList(list);
+		lastRes = new int[2];
 	}
 
 	/**
@@ -59,25 +60,31 @@ public class AutomaticEngine extends Observable	{
 		try {
 			br = new BufferedReader(new FileReader(Main.experimentBaseDirectory + "/referenceFronts/AntiSpamFilterProblem.rf"));
 			String line = br.readLine();
-			String[] resLine = line.split(" ");
+			String[] resLine = line.split(" "); // Assuming the file has at least 1 line, which it should if it managed to be read by the BufferedReader
 			int res[] = {(int)Float.parseFloat(resLine[0]), (int)Float.parseFloat(resLine[1])};
-			lastRes = res;	// Assuming the file has at least 1 line, which it should if it managed to be read by the BufferedReader
+			lastRes[0] = res[0];
+			lastRes[1] = res[1];	
 			line = br.readLine();
 			
+			// TODO BUG: It gets the first line always
 			for(int i = 1; line != null; i++) {
+				resLine = line.split(" ");
 				res[0] = (int)Float.parseFloat(resLine[0]);
 				res[1] = (int)Float.parseFloat(resLine[1]);
 				if(res[1] < lastRes[1])	{	// If finds a lower FN value that recorded before
-					lastRes = res;
+					lastRes[0] = res[0];
+					lastRes[1] = res[1];
 					lineNumber = i;
 				} else 	if(res[1] == lastRes[1])	{	// If finds the same FN value, but lower FP value
 					if(res[0] < lastRes[0])	{
-						lastRes = res;
+						lastRes[0] = res[0];
+						lastRes[1] = res[1];
 						lineNumber = i;
 					}
 				}
 		        line = br.readLine();
 		    }
+			
 			br.close();
 			//System.out.println("Found the best configuration in line " + lineNumber + " with the following results: FP-" + lastRes[0] + " FN-" + lastRes[1]);
 			br = new BufferedReader(new FileReader(Main.experimentBaseDirectory + "/referenceFronts/AntiSpamFilterProblem.rs"));

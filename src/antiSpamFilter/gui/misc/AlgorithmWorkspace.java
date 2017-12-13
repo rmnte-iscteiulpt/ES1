@@ -6,6 +6,8 @@ package antiSpamFilter.gui.misc;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,6 +16,7 @@ import javax.swing.JButton;
 import antiSpamFilter.datastore.RulesConfigList;
 import antiSpamFilter.gui.MainWindow;
 import antiSpamFilter.gui.panels.WorkspacePanel;
+import antiSpamFilter.tools.FileBrowser;
 
 /**
  * JPanel that controls and updates the automatic engine, being linked with it using the observer-observable class
@@ -46,11 +49,27 @@ public class AlgorithmWorkspace extends WorkspacePanel implements Observer	{
 		exportButton.setBounds(280, 134, 150, 25);
 	}
 	
+	/**
+	 * Makes the panel work
+	 */
 	private void setupFunctionality()	{
 		exportButton.addActionListener(new ActionListener()	{  
 	        public void actionPerformed(ActionEvent e)  
 	        {  
-	        	// TODO Add export config file functionality
+	        	FileBrowser fb = new FileBrowser("cfg");
+            	try {
+            		String path = fb.getSavePath();
+            		if(path!= null) {
+            			getMainWindow().getMainEngine().getAutoEngine().getConfigList().exportTo(path);
+            		}
+				} 	catch (FileNotFoundException e1) {
+					System.err.println("Export folder doesn't exist. File export unsuccessful.");
+					e1.printStackTrace();
+				} 	catch (UnsupportedEncodingException e1) {
+					System.err.println("Enconding not supported. File export unsuccessful.");
+					e1.printStackTrace();
+				}
+            	updateTableContent(getMainWindow().getMainEngine().getManualEngine().getConfigList());
 	        }
 	    });
 		
@@ -60,6 +79,7 @@ public class AlgorithmWorkspace extends WorkspacePanel implements Observer	{
 		generateButton.addActionListener(new ActionListener()	{  
             public void actionPerformed(ActionEvent e)  
             {  
+            	// TODO Add a dialog box, saying: Please wait, generating... Loading bar? Optional
             	getMainWindow().getMainEngine().getAutoEngine().runAlgorithm();
             	updateResults(getMainWindow().getMainEngine().getAutoEngine().getCurrentResults());
             }

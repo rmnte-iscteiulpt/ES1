@@ -19,6 +19,9 @@ public class Main {
 	// Algorithm folder paths
 	public static final String experimentBaseDirectory = System.getProperty("user.dir") + "/experimentBaseDirectory";	// result folder
 	
+	// Default Export folder
+	public static final String defaultExportPath = System.getProperty("user.dir") + "\\AntiSpamConfigurationForLeisureMailbox\\customConfigFiles\\";
+	
 	// Short testing paths
 	//public static final String defaultRulesPath = "/resources/testingConfigFiles/rules.cf";
 	//public static final String defaultHamPath = "/resources/testingConfigFiles/ham.log";
