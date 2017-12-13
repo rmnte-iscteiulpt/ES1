@@ -8,7 +8,7 @@ import antiSpamFilter.tools.RulesUtility;
  * @author rmnte-iscteiulpt
  *
  */
-public class MainEngine {
+public class MainEngine	{
 
 	private ManualEngine manualEngine;
 	private AutomaticEngine autoEngine;

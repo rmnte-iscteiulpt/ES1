@@ -25,10 +25,10 @@ import antiSpamFilter.tools.LoadingTimer;
 public class MainWindow extends JFrame {
 
 	private JButton optionsButton;
-	private JButton saveButton;
+
 	private AlgorithmWorkspace autoPanel;
 	private ManualWorkspace manualPanel;
-	
+
 	private MainEngine mainEngine;
 	
 	/**
@@ -60,15 +60,16 @@ public class MainWindow extends JFrame {
 	        }	
 		});
 		setLayout(null);
-		setBounds(100, 100, 700, 550);
+		setBounds(100, 100, 470, 525);
 		setResizable(false);
 		
 		OptionsDialog optionWindow = new OptionsDialog(this);
-		setupManualPanel();
+		
 		setupAutomaticPanel();
+		setupManualPanel();
 		optionsButton = new JButton("Options");
 		add(optionsButton);
-		optionsButton.setBounds(542, 475, 142, 36);
+		optionsButton.setBounds(311, 450, 142, 36);
 		optionsButton.addActionListener(new ActionListener()	{  
             public void actionPerformed(ActionEvent e)  
             {  
@@ -76,9 +77,6 @@ public class MainWindow extends JFrame {
             }  
         });  
 		
-		saveButton = new JButton("Save");
-		add(saveButton);
-		saveButton.setBounds(385, 475, 142, 36);
 		setVisible(true);
 		System.out.println("Window loaded in " + timer.getElapsedTime() + "ms.");
 	}
@@ -87,7 +85,7 @@ public class MainWindow extends JFrame {
 	 * Setup the manual workspace panel
 	 */
 	private void setupManualPanel() {
-		manualPanel = new ManualWorkspace(new Rectangle(10, 31, 674, 200), this, mainEngine.getManualEngine().getConfigList());
+		manualPanel = new ManualWorkspace(new Rectangle(10, 31, 444, 200), this, mainEngine.getManualEngine().getConfigList());
 		add(manualPanel);
 		
 		JLabel manualText = new JLabel("Manual Workspace");
@@ -100,7 +98,7 @@ public class MainWindow extends JFrame {
 	 * Setup the automatic workspace panel
 	 */
 	private void setupAutomaticPanel() {
-		autoPanel = new AlgorithmWorkspace(new Rectangle(10, 264, 674, 200), this, mainEngine.getAutoEngine().getConfigList());
+		autoPanel = new AlgorithmWorkspace(new Rectangle(10, 264, 444, 174), this, mainEngine.getAutoEngine().getConfigList());
 		add(autoPanel);
 
 		JLabel automaticText = new JLabel("Automatic Workspace");
@@ -124,5 +122,6 @@ public class MainWindow extends JFrame {
 	public MainEngine getMainEngine() {
 		return mainEngine;
 	}
+
 
 }

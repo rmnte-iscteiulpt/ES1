@@ -65,7 +65,7 @@ public class RulesUtility {
 		}	else	{
 			this.rulesPath = rulesPath;
 		}
-		System.out.println("Rules.cf Path Updated to: -" + this.rulesPath + "-"); // Path debug
+		//System.out.println("Rules.cf Path Updated to: -" + this.rulesPath + "-"); // Path debug
 		loadRules();
 	}
 

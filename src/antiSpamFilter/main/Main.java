@@ -22,10 +22,17 @@ public class Main {
 	// Default Export folder
 	public static final String defaultExportPath = System.getProperty("user.dir") + "\\AntiSpamConfigurationForLeisureMailbox\\customConfigFiles\\";
 	
-	// Short testing paths
-	//public static final String defaultRulesPath = "/resources/testingConfigFiles/rules.cf";
-	//public static final String defaultHamPath = "/resources/testingConfigFiles/ham.log";
-	//public static final String defaultSpamPath = "/resources/testingConfigFiles/spam.log";
+	/*
+	 * TODO
+	 * 
+	 * RunTime to convert important files for reports etc...
+	 * JUnit
+	 * Eclipse Eclemma 10% coverage
+	 * Code Ispection Template
+	 * Sprint Retrospective reunions etc...
+	 * Youtube showcase video
+	 * 
+	 */
 	
 	/**
 	 * Main method

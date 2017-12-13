@@ -48,7 +48,7 @@ public class AutomaticEngine extends Observable	{
 	/**
 	 * Runs algorithm NSGAII
 	 */
-	public void runAlgorithm()	{
+	public synchronized void runAlgorithm()	{
 		try {
 			new AntiSpamFilterAutomaticConfiguration(configList);
 		} catch (IOException e) {
@@ -66,7 +66,6 @@ public class AutomaticEngine extends Observable	{
 			lastRes[1] = res[1];	
 			line = br.readLine();
 			
-			// TODO BUG: It gets the first line always
 			for(int i = 1; line != null; i++) {
 				resLine = line.split(" ");
 				res[0] = (int)Float.parseFloat(resLine[0]);

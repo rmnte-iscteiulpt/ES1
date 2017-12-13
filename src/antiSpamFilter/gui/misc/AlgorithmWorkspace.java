@@ -12,7 +12,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
-
 import antiSpamFilter.datastore.RulesConfigList;
 import antiSpamFilter.gui.MainWindow;
 import antiSpamFilter.gui.panels.WorkspacePanel;
@@ -79,11 +78,14 @@ public class AlgorithmWorkspace extends WorkspacePanel implements Observer	{
 		generateButton.addActionListener(new ActionListener()	{  
             public void actionPerformed(ActionEvent e)  
             {  
-            	// TODO Add a dialog box, saying: Please wait, generating... Loading bar? Optional
-            	getMainWindow().getMainEngine().getAutoEngine().runAlgorithm();
-            	updateResults(getMainWindow().getMainEngine().getAutoEngine().getCurrentResults());
+            	runAlgorithm();
             }
         });
+	}
+	
+	private void runAlgorithm()	{
+    	getMainWindow().getMainEngine().getAutoEngine().runAlgorithm();
+    	updateResults(getMainWindow().getMainEngine().getAutoEngine().getCurrentResults());
 	}
 
 	@Override

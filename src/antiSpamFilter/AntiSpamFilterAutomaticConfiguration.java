@@ -20,17 +20,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AntiSpamFilterAutomaticConfiguration {
+public class AntiSpamFilterAutomaticConfiguration	{
 	
 	private static final int INDEPENDENT_RUNS = 5;
 	
 	public AntiSpamFilterAutomaticConfiguration(RulesConfigList configList) throws IOException {
-		
-	    
-	    List<ExperimentProblem<DoubleSolution>> problemList = new ArrayList<>();
-	    ///////////////////////////////////////
-	    problemList.add(new ExperimentProblem<>(new AntiSpamFilterProblem(configList)));	// evaluate containing class
-
+		List<ExperimentProblem<DoubleSolution>> problemList = new ArrayList<>();
+	    problemList.add(new ExperimentProblem<>(new AntiSpamFilterProblem(configList)));
 	    List<ExperimentAlgorithm<DoubleSolution, List<DoubleSolution>>> algorithmList =
 	            configureAlgorithmList(problemList);
 	    Experiment<DoubleSolution, List<DoubleSolution>> experiment =
@@ -48,10 +44,14 @@ public class AntiSpamFilterAutomaticConfiguration {
 	            .build();
 
 	    new ExecuteAlgorithms<>(experiment).run();
-	    new GenerateReferenceParetoSetAndFrontFromDoubleSolutions(experiment).run();
-	    new ComputeQualityIndicators<>(experiment).run();
-	    new GenerateLatexTablesWithStatistics(experiment).run();
-	    new GenerateBoxplotsWithR<>(experiment).setRows(1).setColumns(1).run();
+	    try {
+	    	new GenerateReferenceParetoSetAndFrontFromDoubleSolutions(experiment).run();
+		    new ComputeQualityIndicators<>(experiment).run();
+		    new GenerateLatexTablesWithStatistics(experiment).run();
+			new GenerateBoxplotsWithR<>(experiment).setRows(1).setColumns(1).run();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private List<ExperimentAlgorithm<DoubleSolution, List<DoubleSolution>>> configureAlgorithmList(List<ExperimentProblem<DoubleSolution>> problemList) {
