@@ -13,7 +13,7 @@ import java.util.Observer;
 
 import javax.swing.JButton;
 import antiSpamFilter.datastore.RulesConfigList;
-import antiSpamFilter.gui.MainWindow;
+import antiSpamFilter.gui.frames.MainWindow;
 import antiSpamFilter.gui.panels.WorkspacePanel;
 import antiSpamFilter.tools.FileBrowser;
 
@@ -58,8 +58,10 @@ public class AlgorithmWorkspace extends WorkspacePanel implements Observer	{
 	        	FileBrowser fb = new FileBrowser("cfg");
             	try {
             		String path = fb.getSavePath();
-            		if(path!= null) {
+            		System.out.println(path);
+            		if(path != null) {
             			getMainWindow().getMainEngine().getAutoEngine().getConfigList().exportTo(path);
+            			updateTableContent(getMainWindow().getMainEngine().getAutoEngine().getConfigList());
             		}
 				} 	catch (FileNotFoundException e1) {
 					System.err.println("Export folder doesn't exist. File export unsuccessful.");
@@ -68,7 +70,7 @@ public class AlgorithmWorkspace extends WorkspacePanel implements Observer	{
 					System.err.println("Enconding not supported. File export unsuccessful.");
 					e1.printStackTrace();
 				}
-            	updateTableContent(getMainWindow().getMainEngine().getManualEngine().getConfigList());
+            	
 	        }
 	    });
 		
@@ -78,14 +80,10 @@ public class AlgorithmWorkspace extends WorkspacePanel implements Observer	{
 		generateButton.addActionListener(new ActionListener()	{  
             public void actionPerformed(ActionEvent e)  
             {  
-            	runAlgorithm();
+            	getMainWindow().getMainEngine().getAutoEngine().runAlgorithm();
+            	updateResults(getMainWindow().getMainEngine().getAutoEngine().getCurrentResults());
             }
         });
-	}
-	
-	private void runAlgorithm()	{
-    	getMainWindow().getMainEngine().getAutoEngine().runAlgorithm();
-    	updateResults(getMainWindow().getMainEngine().getAutoEngine().getCurrentResults());
 	}
 
 	@Override

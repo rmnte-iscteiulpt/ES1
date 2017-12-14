@@ -1,7 +1,7 @@
 package antiSpamFilter.main;
 
 import antiSpamFilter.engines.MainEngine;
-import antiSpamFilter.gui.MainWindow;
+import antiSpamFilter.gui.frames.MainWindow;
 import antiSpamFilter.tools.RulesUtility;
 
 /**
@@ -22,12 +22,11 @@ public class Main {
 	// Default Export folder
 	public static final String defaultExportPath = System.getProperty("user.dir") + "\\AntiSpamConfigurationForLeisureMailbox\\customConfigFiles\\";
 	
-	/*
-	 * TODO
+	/* 
+	 * BUGS:
 	 * 
+	 * TODO
 	 * RunTime to convert important files for reports etc...
-	 * JUnit
-	 * Eclipse Eclemma 10% coverage
 	 * Code Ispection Template
 	 * Sprint Retrospective reunions etc...
 	 * Youtube showcase video

@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import antiSpamFilter.datastore.RulesConfigList;
-import antiSpamFilter.gui.MainWindow;
+import antiSpamFilter.gui.frames.MainWindow;
 import antiSpamFilter.gui.panes.TablePane;
 
 @SuppressWarnings("serial")
@@ -86,19 +86,35 @@ public class WorkspacePanel extends JPanel	{
 		tablePane.updateContent(arg);
 	}
 	
+	/**
+	 * Updates results showed on the results panel
+	 * @param res The result array to show in the panel
+	 */
 	public void updateResults(int[] res)	{
 		fpValue.setText("" + res[0]);
     	fnValue.setText("" + res[1]);
 	}
 
+	/**
+	 * Getter for the main window frame
+	 * @return The main window
+	 */
 	protected MainWindow getMainWindow() {
 		return mainWindow;
 	}
 
+	/**
+	 * Getter for the table pane
+	 * @return The table pane
+	 */
 	protected TablePane getTablePane() {
 		return tablePane;
 	}
 
+	/**
+	 * Getter for the results panel
+	 * @return The results panel
+	 */
 	protected JPanel getResultsPanel() {
 		return resultsPanel;
 	}

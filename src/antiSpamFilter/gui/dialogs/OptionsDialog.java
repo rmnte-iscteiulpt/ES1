@@ -5,7 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import antiSpamFilter.gui.MainWindow;
+
+import antiSpamFilter.gui.frames.MainWindow;
 import antiSpamFilter.gui.panels.FileLocationPanel;
 import antiSpamFilter.tools.FileBrowser;
 

@@ -1,4 +1,4 @@
-package antiSpamFilter.gui;
+package antiSpamFilter.gui.frames;
 
 import java.awt.Font;
 import java.awt.Rectangle;

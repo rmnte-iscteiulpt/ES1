@@ -152,4 +152,21 @@ public class Evaluator {
 		//System.out.println("[Evaluator] Found " + res[0] + "FP and " + res[1] + "FN in the current configuration.");
 		return res;
 	}
+	
+	/**
+	 * Getter for the current hamPath
+	 * @return The current hampath
+	 */
+	public String getHamPath() {
+		return hamPath;
+	}
+
+	/**
+	 * Getter for the current spamPath
+	 * @return The current spampath
+	 */
+	public String getSpamPath() {
+		return spamPath;
+	}
+
 }

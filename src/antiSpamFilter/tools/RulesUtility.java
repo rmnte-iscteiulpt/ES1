@@ -19,10 +19,6 @@ import antiSpamFilter.main.Main;
  */
 public class RulesUtility {
 
-	/*
-	 * TODO
-	 * Fix not updating the results panel. Whats going on?
-	 */
 	private String rulesPath;
 	private ArrayList<String> rulesList;
 
@@ -104,6 +100,14 @@ public class RulesUtility {
 	 */
 	public ArrayList<String> getRulesList()	{
 		return rulesList;
+	}
+	
+	/**
+	 * Getter for the current rules.cf path
+	 * @return The current rules path
+	 */
+	public String getRulesPath()	{
+		return rulesPath;
 	}
 	
 }

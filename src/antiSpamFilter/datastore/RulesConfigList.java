@@ -57,6 +57,10 @@ public class RulesConfigList {
 		resetWeights();
 	}
 	
+	/**
+	 * Updates entire weightList
+	 * @param weightList New weight array to replace the list
+	 */
 	public void updateWeights(double[] weightList)	{
 		this.weightList = new ArrayList<Float>();
 		for(int i = 0; i<weightList.length; i++)	{
