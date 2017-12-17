@@ -3,7 +3,10 @@ package antiSpamFilter.engines;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Observable;
 
 import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
@@ -105,6 +108,38 @@ public class AutomaticEngine extends Observable	{
 			System.err.println("Couldnt read file. Something went wrong with the algorithm.");
 			e.printStackTrace();
 		}
+	}
+	
+	/*
+	 * TODO
+	 * Bug: RunTime's export location is on root. How to change?
+	 */
+	
+	/**
+	 * Compiles the results files, using the RScript and miktex converter, de. The program location is provided by using a file chooser
+	 * @param tPath The path where the program pdflatex.exe is located
+	 */
+	public void compile(String[] args)	{
+
+	    try {
+	    	Process process = new ProcessBuilder(args).start();
+	    	InputStream is = process.getInputStream();
+	    	InputStreamReader isr = new InputStreamReader(is);
+	    	BufferedReader br = new BufferedReader(isr);
+	    	String line;
+
+	    	System.out.println("Output of running " + Arrays.toString(args) + " is:");
+
+	    	while ((line = br.readLine()) != null) {
+	    	  System.out.println(line);
+	    	}
+			//Runtime.getRuntime().exec(args);
+			System.out.println("--------------------- File compiled sucessfully.");
+		} catch (IOException e) {
+			System.err.println("Couldn't execute program. Make sure the software is installed correctly, and at least 1 configuration was generated.");
+		}
+		
+		
 	}
 	
 	/**

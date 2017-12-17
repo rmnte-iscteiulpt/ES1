@@ -17,23 +17,34 @@ import antiSpamFilter.main.Main;
 public class FileBrowser extends JFileChooser {
 
 	/**
+	 * Default constructor
+	 * @param file 
+	 */
+	public FileBrowser(String file)	{
+		this(file, Main.defaultExportPath);
+	}
+	
+	/**
 	 * Constructor
 	 * @param file File that the FileBrowser should help locate
-	 */
-	public FileBrowser(String file) {
+	 * @param defaultFolder The folder that it will open when the dialog window appears
+	 */ 
+	public FileBrowser(String file, String defaultFolder) {
 		super();
 		
 		// Check if directory exists, if not, creates it. If it cant due to security reasons, it will use the user's documents folder.
-		if (!new File(Main.defaultExportPath).exists()) {
+		if (!new File(defaultFolder).exists()) {
 		    try{
-		    	new File(Main.defaultExportPath).mkdir();
+		    	new File(defaultFolder).mkdir();
 		    } 
 		    catch(SecurityException se){
-		    	System.out.println("hey");
+		    	System.out.println("Couldn't create folder. Opening user's documents folder.");
 		    }        
 		}
+		setDialogTitle("Choose custom " + file + " file");
 		
-		setCurrentDirectory(new File(Main.defaultExportPath));
+		setAcceptAllFileFilterUsed(false);
+		setCurrentDirectory(new File(defaultFolder));
 		String fileFilterDescription = "";
 		String fileExtension = "";
 		if(file == "rules")	{
@@ -48,12 +59,18 @@ public class FileBrowser extends JFileChooser {
 		}	else	if(file == "cfg")	{
 			fileFilterDescription = "Configuration file";
 			fileExtension = "cfg";
+		}	else	if(file == "r")	{
+			setDialogTitle("Locate RScript.exe");
+			fileFilterDescription = "RScript.exe";
+			fileExtension = "exe";
+		}	else	if(file == "tex")	{
+			setDialogTitle("Locate pdflatex.exe");
+			fileFilterDescription = "pdflatex.exe";
+			fileExtension = "exe";
 		}
-		FileNameExtensionFilter filter = new FileNameExtensionFilter(fileFilterDescription, fileExtension);
-		setDialogTitle("Choose custom " + file + " file");
-		addChoosableFileFilter(filter);
-		setAcceptAllFileFilterUsed(false);
 		
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(fileFilterDescription, fileExtension);
+		addChoosableFileFilter(filter);
 	}
 	
 	/**
