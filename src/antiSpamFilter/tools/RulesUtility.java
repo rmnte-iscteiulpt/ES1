@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -34,9 +32,7 @@ public class RulesUtility {
 	 * @param rulesPath Specific path for the rules.cf file
 	 */
 	public RulesUtility(String rulesPath) {
-		//LoadingTimer timer = new LoadingTimer(); // Timer debug
 		updatePath(rulesPath);
-		//System.out.println("File read and sorted in " + timer.getElapsedTime() + "ms."); // Timer debug
 	}
 
 	/**
@@ -44,7 +40,7 @@ public class RulesUtility {
 	 */
 	public void loadRules()	{
 		rulesList = readFile();
-		if(rulesList == null)	{	// This means the file was not found or there was an io exception
+		if(rulesList == null)	{
 			updatePath("");
 		}	else	{
 			Collections.sort(rulesList);
@@ -61,7 +57,6 @@ public class RulesUtility {
 		}	else	{
 			this.rulesPath = rulesPath;
 		}
-		//System.out.println("Rules.cf Path Updated to: -" + this.rulesPath + "-"); // Path debug
 		loadRules();
 	}
 
@@ -82,7 +77,6 @@ public class RulesUtility {
 		    String line = br.readLine();
 		    while (line != null) {
 		        ruleList.add(line);
-		        //System.out.println(line);
 		        line = br.readLine();
 		    }
 		    br.close();

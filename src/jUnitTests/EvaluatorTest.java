@@ -9,6 +9,9 @@ import antiSpamFilter.tools.Evaluator;
 
 class EvaluatorTest {
 
+	/**
+	 * Tests the evaluator constructors
+	 */
 	@Test
 	void testConstructors() {
 		// Default path
@@ -18,8 +21,8 @@ class EvaluatorTest {
 		
 		// Unexisting path
 		Evaluator e2 = new Evaluator("/path","/path");
-		assertEquals(e1.getHamPath(), Main.defaultHamPath);
-		assertEquals(e1.getSpamPath(), Main.defaultSpamPath);
+		assertEquals(e2.getHamPath(), Main.defaultHamPath);
+		assertEquals(e2.getSpamPath(), Main.defaultSpamPath);
 	}
 
 }

@@ -30,7 +30,7 @@ public class Evaluator {
 	 * 
 	 * Results handling:
 	 * sum>5 = spam
-	 * sum<5 = safe
+	 * sum<=5 = safe
 	 * 
 	 * FP (false positives) means that a message was considered spam, when it was safe
 	 * FN (false negatives) means that a message was considered safe, when it was spam
@@ -99,7 +99,7 @@ public class Evaluator {
 			String[] args = null;
 			while(aux != null)	{
 				args = aux.split("\t");
-			    // Assuming there's no inconsistencies. For now... TODO
+			    // Assuming there's no inconsistencies.
 				float sum = 0f;
 			    for(int i = 1; i<args.length; i++)	{	// For each i in args sums the weight value for the respective rule, storing it in the var sum.
 			    	sum+= list.getRuleWeight(args[i]);
@@ -113,8 +113,9 @@ public class Evaluator {
 			br.close();
 			
 		} catch (FileNotFoundException e1) {
-			System.out.println("Path for  file doesn't exist. Using the default file.");
-			// TODO Add a way to use the default file if the custom file doesn't exist.
+			System.out.println("Ham.log file doesn't exist. Using the default file.");
+			hamPath = Main.defaultHamPath;
+			return evaluate(list);
 		} catch (IOException e1) {
 		}
 		
@@ -130,7 +131,7 @@ public class Evaluator {
 			String[] args = null;
 			while(aux != null)	{
 				args = aux.split("\t");
-			    // Assuming there's no inconsistencies. For now... TODO
+			    // Assuming there's no inconsistencies.
 				float sum = 0f;
 			    for(int i = 1; i<args.length; i++)	{	// For each i in args sums the weight value for the respective rule, storing it in the var sum.
 			    	sum+= list.getRuleWeight(args[i]);
@@ -144,11 +145,11 @@ public class Evaluator {
 			br.close();
 			
 		} catch (FileNotFoundException e1) {
-			System.out.println("Path for  file doesn't exist. Using the default file.");
-			// TODO Add a way to use the default file if the custom file doesn't exist.
+			System.out.println("Spam.log file doesn't exist. Using the default file.");
+			spamPath = Main.defaultSpamPath;
+			return evaluate(list);
 		} catch (IOException e1) {
 		}
-		
 		//System.out.println("[Evaluator] Found " + res[0] + "FP and " + res[1] + "FN in the current configuration.");
 		return res;
 	}

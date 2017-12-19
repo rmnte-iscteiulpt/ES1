@@ -60,7 +60,7 @@ public class FileLocationPanel extends JPanel	{
                 path.setEditable(checkBox.isSelected());
             }
         });  
-		oldPath = path.getText();	// Needs to be ""
+		oldPath = path.getText();
 	}
 	
 	/**

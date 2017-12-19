@@ -14,7 +14,6 @@ import antiSpamFilter.gui.misc.AlgorithmWorkspace;
 import antiSpamFilter.gui.misc.ManualWorkspace;
 import antiSpamFilter.main.Main;
 import antiSpamFilter.tools.FileBrowser;
-import antiSpamFilter.tools.LoadingTimer;
 
 @SuppressWarnings("serial")
 /**
@@ -49,8 +48,6 @@ public class MainWindow extends JFrame {
 	 * Creates the window, setting up the layout
 	 */
 	private void setupFrame()	{
-		LoadingTimer timer = new LoadingTimer();
-		System.out.println("Loading window...");
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		JFrame frame = this;
 		addWindowListener(new WindowAdapter()	{
@@ -92,7 +89,6 @@ public class MainWindow extends JFrame {
         });  
 		
 		setVisible(true);
-		System.out.println("Window loaded in " + timer.getElapsedTime() + "ms.");
 	}
 
 	/**

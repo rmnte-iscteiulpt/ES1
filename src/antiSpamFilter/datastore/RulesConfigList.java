@@ -115,7 +115,8 @@ public class RulesConfigList {
 		String[] args = {};
 	    String rule = "";
 	    float weight = 0f;
-	    while (buffer != null) {
+	    boolean read = true;
+	    while (read) {
 	    	args = buffer.split(" ");
 	    	rule = args[0];
 	    	weight = Float.parseFloat(args[1]);
@@ -127,19 +128,20 @@ public class RulesConfigList {
 	        	newWeightList.add(weight);
 	        }
 	        buffer = br.readLine();
+	        if(buffer != null)	{
+	        	read = false;
+	        	br.close();
+	        }
 	    }
-	    br.close();
 	    rulesList = newRuleList;
 	    weightList = newWeightList;
 	    System.out.println("Configuration file imported successfully.");
-	    // TODO Update JTable with new values
 	}
 	
 	/**
 	 * Verifies errors between rule and weight lists
 	 */
 	private void checkErrors()	{
-		// TODO Handle exceptions
 		if(rulesList.size() != weightList.size())
 			System.err.println("Rules and weights provided don't match.");
 		if(rulesList.isEmpty())	{
@@ -153,9 +155,7 @@ public class RulesConfigList {
 	 * @return The weight of the given rule
 	 */
 	public float getRuleWeight(String rule)	{
-		// TODO QUESTION
-		// If the rule doesn't exist in the file, should it just throw an exception? Or just give a weight of 0? How to handle that situation?
-		// For now we're giving the weight value of 0
+		// If the rule doesn't exist in the file we're giving the weight value of 0
 		if(rulesList.indexOf(rule) == -1)	{
 			return 0f;
 		}

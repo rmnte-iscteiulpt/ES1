@@ -2,7 +2,6 @@ package antiSpamFilter.main;
 
 import antiSpamFilter.engines.MainEngine;
 import antiSpamFilter.gui.frames.MainWindow;
-import antiSpamFilter.tools.RulesUtility;
 
 /**
  * Main class
@@ -26,8 +25,7 @@ public class Main {
 	 * BUGS:
 	 * 
 	 * TODO
-	 * RunTime to convert important files for reports etc...
-	 * Code Ispection Template
+	 * Code Inspection Template reunion
 	 * Sprint Retrospective reunions etc...
 	 * Youtube showcase video
 	 * 
@@ -39,7 +37,7 @@ public class Main {
 	 */
 	public static void main(String[] args)	{
 		MainEngine me = new MainEngine();
-		MainWindow mw = new MainWindow(me);
+		new MainWindow(me);
 	}
 	
 }

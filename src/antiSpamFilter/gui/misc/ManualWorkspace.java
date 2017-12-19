@@ -83,7 +83,6 @@ public class ManualWorkspace extends WorkspacePanel implements Observer	{
 		applyButton.addActionListener(new ActionListener()	{  
             public void actionPerformed(ActionEvent e)  
             {  
-            	// TODO Add a change token for confirmation. Optional
                 apply();
             }
         });

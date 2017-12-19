@@ -4,8 +4,6 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.filechooser.FileSystemView;
-
 import antiSpamFilter.main.Main;
 
 @SuppressWarnings("serial")
@@ -31,8 +29,6 @@ public class FileBrowser extends JFileChooser {
 	 */ 
 	public FileBrowser(String file, String defaultFolder) {
 		super();
-		
-		// Check if directory exists, if not, creates it. If it cant due to security reasons, it will use the user's documents folder.
 		if (!new File(defaultFolder).exists()) {
 		    try{
 		    	new File(defaultFolder).mkdir();

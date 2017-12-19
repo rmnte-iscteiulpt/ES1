@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <CommunicationClass name="antiSpamFilter.engines.AutomaticEngine"
+        x="1288" y="821">
+        <Association
+            destinationClassName="antiSpamFilter.datastore.RulesConfigList"
+            endpointName="configList" kind="Simple"/>
+        <Communication destinationClassName="antiSpamFilter.datastore.RulesConfigList">
+            <Point x="1156" y="838"/>
+        </Communication>
+    </CommunicationClass>
+    <CommunicationClass name="antiSpamFilter.tools.FileBrowser" x="1162" y="860"/>
+    <CommunicationClass name="antiSpamFilter.tools.RulesUtility"
+        x="1162" y="1170"/>
+    <CommunicationClass name="antiSpamFilter.gui.panels.WorkspacePanel"
+        x="480" y="814">
+        <Association
+            destinationClassName="antiSpamFilter.gui.panes.TablePane"
+            endpointName="tablePane" kind="Simple"/>
+        <Association
+            destinationClassName="antiSpamFilter.gui.frames.MainWindow"
+            endpointName="mainWindow" kind="Simple"/>
+        <Communication destinationClassName="antiSpamFilter.gui.panes.TablePane">
+            <Point x="537" y="941"/>
+        </Communication>
+    </CommunicationClass>
+    <CommunicationClass name="antiSpamFilter.gui.misc.ManualWorkspace"
+        x="700" y="815">
+        <Extension destinationClassName="antiSpamFilter.gui.panels.WorkspacePanel"/>
+        <Communication destinationClassName="antiSpamFilter.gui.panels.WorkspacePanel"/>
+        <Communication destinationClassName="antiSpamFilter.engines.ManualEngine"/>
+        <Communication destinationClassName="antiSpamFilter.gui.panes.TablePane"/>
+    </CommunicationClass>
+    <CommunicationClass
+        name="antiSpamFilter.AntiSpamFilterAutomaticConfiguration"
+        x="952" y="533"/>
+    <CommunicationClass name="antiSpamFilter.AntiSpamFilterProblem"
+        x="951" y="583">
+        <Association
+            destinationClassName="antiSpamFilter.datastore.RulesConfigList"
+            endpointName="rulesList" kind="Simple"/>
+        <Communication destinationClassName="antiSpamFilter.tools.Evaluator"/>
+        <Communication destinationClassName="antiSpamFilter.datastore.RulesConfigList">
+            <Point x="1025" y="682"/>
+            <Point x="1157" y="682"/>
+        </Communication>
+    </CommunicationClass>
+    <CommunicationClass
+        name="antiSpamFilter.gui.misc.AlgorithmWorkspace" x="692" y="752">
+        <Extension destinationClassName="antiSpamFilter.gui.panels.WorkspacePanel"/>
+        <Communication destinationClassName="antiSpamFilter.gui.panels.WorkspacePanel">
+            <Point x="538" y="770"/>
+        </Communication>
+    </CommunicationClass>
+    <CommunicationClass name="antiSpamFilter.engines.MainEngine"
+        x="1160" y="1047">
+        <Association
+            destinationClassName="antiSpamFilter.engines.AutomaticEngine"
+            endpointName="autoEngine" kind="Simple"/>
+        <Association
+            destinationClassName="antiSpamFilter.tools.RulesUtility"
+            endpointName="rulesUtility" kind="Simple"/>
+        <Association
+            destinationClassName="antiSpamFilter.engines.ManualEngine"
+            endpointName="manualEngine" kind="Simple"/>
+        <Association
+            destinationClassName="antiSpamFilter.tools.Evaluator"
+            endpointName="evaluator" kind="Simple"/>
+        <Communication destinationClassName="antiSpamFilter.engines.AutomaticEngine">
+            <Point x="1205" y="1008"/>
+            <Point x="1460" y="1008"/>
+            <Point x="1460" y="838"/>
+        </Communication>
+        <Communication destinationClassName="antiSpamFilter.tools.RulesUtility"/>
+        <Communication destinationClassName="antiSpamFilter.engines.ManualEngine">
+            <Point x="989" y="1064"/>
+        </Communication>
+    </CommunicationClass>
+    <CommunicationClass name="antiSpamFilter.gui.frames.MainWindow"
+        x="1155" y="938">
+        <Association
+            destinationClassName="antiSpamFilter.engines.MainEngine"
+            endpointName="mainEngine" kind="Simple"/>
+        <Association
+            destinationClassName="antiSpamFilter.gui.misc.AlgorithmWorkspace"
+            endpointName="autoPanel" kind="Simple"/>
+        <Association
+            destinationClassName="antiSpamFilter.gui.misc.ManualWorkspace"
+            endpointName="manualPanel" kind="Simple"/>
+        <Communication destinationClassName="antiSpamFilter.engines.AutomaticEngine">
+            <Point x="1347" y="956"/>
+        </Communication>
+        <Communication destinationClassName="antiSpamFilter.tools.FileBrowser"/>
+        <Communication destinationClassName="antiSpamFilter.engines.ManualEngine">
+            <Point x="1077" y="955"/>
+            <Point x="1077" y="832"/>
+        </Communication>
+    </CommunicationClass>
+    <CommunicationClass name="antiSpamFilter.tools.Evaluator" x="1303" y="583">
+        <Communication destinationClassName="antiSpamFilter.datastore.RulesConfigList">
+            <Point x="1341" y="734"/>
+        </Communication>
+    </CommunicationClass>
+    <CommunicationClass name="antiSpamFilter.gui.dialogs.OptionsDialog"
+        x="1493" y="824">
+        <Association
+            destinationClassName="antiSpamFilter.gui.panels.FileLocationPanel"
+            endpointName="spamPanel" kind="Simple"/>
+        <Association
+            destinationClassName="antiSpamFilter.tools.FileBrowser"
+            endpointName="rulesBrowser" kind="Simple"/>
+        <Association
+            destinationClassName="antiSpamFilter.tools.FileBrowser"
+            endpointName="spamBrowser" kind="Simple"/>
+        <Association
+            destinationClassName="antiSpamFilter.gui.panels.FileLocationPanel"
+            endpointName="rulesPanel" kind="Simple"/>
+        <Association
+            destinationClassName="antiSpamFilter.gui.panels.FileLocationPanel"
+            endpointName="hamPanel" kind="Simple"/>
+        <Association
+            destinationClassName="antiSpamFilter.tools.FileBrowser"
+            endpointName="hamBrowser" kind="Simple"/>
+        <Association
+            destinationClassName="antiSpamFilter.gui.frames.MainWindow"
+            endpointName="frame" kind="Simple"/>
+        <Communication destinationClassName="antiSpamFilter.tools.Evaluator">
+            <Point x="1544" y="601"/>
+        </Communication>
+        <Communication destinationClassName="antiSpamFilter.gui.panels.FileLocationPanel"/>
+        <Communication destinationClassName="antiSpamFilter.engines.MainEngine">
+            <Point x="1545" y="1064"/>
+        </Communication>
+    </CommunicationClass>
+    <CommunicationClass name="antiSpamFilter.main.Main" x="1045" y="1173"/>
+    <CommunicationClass
+        name="antiSpamFilter.gui.panels.FileLocationPanel" x="1679" y="826"/>
+    <CommunicationClass name="antiSpamFilter.datastore.RulesConfigList"
+        x="1103" y="716"/>
+    <CommunicationClass name="antiSpamFilter.engines.ManualEngine"
+        x="936" y="815">
+        <Association
+            destinationClassName="antiSpamFilter.datastore.RulesConfigList"
+            endpointName="configList" kind="Simple"/>
+        <Communication destinationClassName="antiSpamFilter.datastore.RulesConfigList">
+            <Point x="988" y="733"/>
+        </Communication>
+    </CommunicationClass>
+    <CommunicationClass name="antiSpamFilter.gui.panes.TablePane"
+        x="720" y="925"/>
+    <CommunicationClass name="antiSpamFilter.tools.LoadingTimer" x="998" y="1118"/>
+</ClassDiagram>

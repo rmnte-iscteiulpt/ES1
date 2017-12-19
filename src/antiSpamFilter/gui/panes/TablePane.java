@@ -47,7 +47,6 @@ public class TablePane extends JScrollPane	{
 			o[i][0] = arg.getRulesList().get(i);
 			o[i][1] = arg.getWeightList().get(i);
 		}
-		// TODO Is there a better way to update the table's values without making it from scratch everytime?
 		table.setModel(new DefaultTableModel(
 				o,
 				new String[] {

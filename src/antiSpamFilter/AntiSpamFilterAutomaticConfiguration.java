@@ -24,6 +24,11 @@ public class AntiSpamFilterAutomaticConfiguration	{
 	
 	private static final int INDEPENDENT_RUNS = 5;
 	
+	/**
+	 * Default constructor
+	 * @param configList The list which to create the AntiSpamFilterProblem class with
+	 * @throws IOException Throws IOException
+	 */
 	public AntiSpamFilterAutomaticConfiguration(RulesConfigList configList) throws IOException {
 		List<ExperimentProblem<DoubleSolution>> problemList = new ArrayList<>();
 	    problemList.add(new ExperimentProblem<>(new AntiSpamFilterProblem(configList)));

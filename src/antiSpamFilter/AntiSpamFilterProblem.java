@@ -8,19 +8,16 @@ import org.uma.jmetal.solution.DoubleSolution;
 
 import antiSpamFilter.datastore.RulesConfigList;
 import antiSpamFilter.tools.Evaluator;
-import antiSpamFilter.tools.RulesUtility;
 
 @SuppressWarnings("serial")
 public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 
 	private RulesConfigList rulesList;
-	
-	/*
-	 * TODO
-	 * Problem: Maximum and minimum values of index 0 are the same: 0.0
-	 * WTF FIX
-	 */
 
+	/**
+	 * Default constructor
+	 * @param configList The list which contains the rules and serves as a variable to be used by the evaluator
+	 */
 	public AntiSpamFilterProblem(RulesConfigList configList) {
 		rulesList = configList;
 		setNumberOfVariables(rulesList.getWeightList().size());
@@ -38,7 +35,9 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 		setUpperLimit(upperLimit);
 	}
 
-	// Compare configuration vector with spam and ham, obtaining the FP and FN results
+	/**
+	 * Uses the Evaluator class to evaluate a DoubleSolution
+	 */
 	public void evaluate(DoubleSolution solution)	{
 		double[] weightBuffer = new double[getNumberOfVariables()];
 		for (int i = 0; i < solution.getNumberOfVariables(); i++) {
