@@ -112,7 +112,7 @@ public class AutomaticEngine extends Observable	{
 	
 	/**
 	 * Compiles the results files, using the RScript and miktex converter, de. The program location is provided by using a file chooser
-	 * @param tPath The path where the program pdflatex.exe is located
+	 * @param args The args to be ran on the process
 	 */
 	public void compile(String[] args)	{
 

@@ -1,0 +1,11 @@
+antiSpamFilter
+antiSpamFilter.datastore
+antiSpamFilter.engines
+antiSpamFilter.gui.dialogs
+antiSpamFilter.gui.frames
+antiSpamFilter.gui.misc
+antiSpamFilter.gui.panels
+antiSpamFilter.gui.panes
+antiSpamFilter.main
+antiSpamFilter.tools
+jUnitTests

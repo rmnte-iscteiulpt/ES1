@@ -39,6 +39,7 @@ public class OptionsDialog extends JDialog	{
 	
 	/**
 	 * Constructor
+	 * @param frame The main window
 	 */
 	public OptionsDialog(MainWindow frame)	{
 		super(frame, "Options", true);

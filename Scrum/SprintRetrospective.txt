@@ -1,0 +1,13 @@
+Sprint Restrospective Reunions
+
+1st Sprint - 7th to 21st Novemeber
+
+This sprint was planned to be less about coding, but more about planning. With the small timespan I could invest in the project, only the interface was really made. I had to plan how the interface would work, draw and write notes about how it would all come together after i implemented the engines, and how i could link everything after it was all done. The interface looked pretty solid, and it kept its design till the end of the project, only a few buttons changed due to better understanding on how the engines should work and what they should do. Next step was to implement the manual workspace and link it with the interface.
+
+2nd Sprint - 22nd November to 6th December
+
+The manual workspace was done during this sprint, which I focused more in coding, rather than planning. The manual engine was working, export and import functionality and classes to handle the three configuration files were all working, including the evaluator class. Most method were designed to work only with the manual engine in mind, since the automatic engine wasn't developed yet: this had to change in the next sprint. During the next sprint, which was the last one, I knew I had to implement the automatic engine and polish the entire software: this meant any missing javadoc, junit testing, code coverage and much more.
+
+3rd Sprint - 7th December to 21th December
+
+The last sprint was focused heavily on adding the last engine, making the software fully operational. The automatic engine was developped, most methods and classes were changed to support this addition and the graphical user interfaced suffered a few changed in consequence. Junit testing, code coverage and code inspection were done, alongside multiple other procedures required. I also made the showcase video and the rest of the requirements for the assignment during this sprint. A few features were planned on being addded but couldn't make it in time, such as a loading dialog, for when the algorithm generates a configuration. Instead, the UI just freezes, and only unlocks when the algorithm process ends. 

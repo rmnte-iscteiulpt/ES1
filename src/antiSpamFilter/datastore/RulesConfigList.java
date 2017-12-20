@@ -90,8 +90,8 @@ public class RulesConfigList {
 	/**
 	 * Exports current configuration list to a .cfg file on a specific folder
 	 * @param path Path to the file that the file needs to be saved.
-	 * @throws UnsupportedEncodingException 
-	 * @throws FileNotFoundException 
+	 * @throws UnsupportedEncodingException Exception if the file has a different enconding
+	 * @throws FileNotFoundException If the file isn't found, shouldn't happen since its an export
 	 */
 	public void exportTo(String path) throws FileNotFoundException, UnsupportedEncodingException	{
 
@@ -105,7 +105,7 @@ public class RulesConfigList {
 	/**
 	 * Imports a configuration list from a given .cfg file. It verifies if the given list matches the list stored in the RulesUtility class.
 	 * @param path The path pointing to the .cfg file
-	 * @throws IOException 
+	 * @throws IOException IOException with the BufferedReader
 	 */
 	public void importFrom(String path) throws IOException	{
 		ArrayList<String> newRuleList = new ArrayList<String>();

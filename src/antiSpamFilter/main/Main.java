@@ -27,6 +27,10 @@ public class Main {
 	 * TODO
 	 * Code Inspection Template reunion
 	 * Sprint Retrospective reunions etc...
+	 * Start doing
+	 * Stop doing
+	 * Continue doing
+	 * 
 	 * Youtube showcase video
 	 * 
 	 */

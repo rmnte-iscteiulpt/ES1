@@ -16,7 +16,7 @@ public class FileBrowser extends JFileChooser {
 
 	/**
 	 * Default constructor
-	 * @param file 
+	 * @param file The file name, used to help the user know what file he's looking for in the dialog
 	 */
 	public FileBrowser(String file)	{
 		this(file, Main.defaultExportPath);
