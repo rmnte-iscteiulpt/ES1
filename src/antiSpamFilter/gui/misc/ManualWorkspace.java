@@ -24,11 +24,11 @@ import antiSpamFilter.tools.FileBrowser;
 @SuppressWarnings("serial")
 public class ManualWorkspace extends WorkspacePanel implements Observer	{
 
-	private JButton resetButton;
-	private JButton discardButton;
-	private JButton applyButton;
-	private JButton exportButton;
-	private JButton importButton;
+	private JButton resetButton;	// Button that resets all the values on the manual table display back to 0
+	private JButton discardButton;	// Button that discards the values in the manual table display back to the ones saved in the buffer
+	private JButton applyButton;	// Button that applies the buffer to the manual table display
+	private JButton exportButton;	// Exports the current configuration to the chosen .cfg file
+	private JButton importButton;	// Imports a configuration from a chosen .cfg file
 	
 	/**
 	 * Constructor

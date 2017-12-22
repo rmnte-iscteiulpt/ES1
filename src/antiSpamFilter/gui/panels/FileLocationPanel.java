@@ -18,10 +18,10 @@ import javax.swing.JTextField;
  */
 public class FileLocationPanel extends JPanel	{
 	
-	private JLabel label;
-	private JTextField path;
-	private JCheckBox checkBox;
-	private String oldPath;
+	private JLabel label;	// Label containing the file name to aid the user understand which file the panel locates
+	private JTextField path;	// A text field that will hold the inserted path, sent and interpreted by the engine if applied
+	private JCheckBox checkBox;	// Check box will enable the file location, not checking it, will make the engine use the default file, regardless of what's in the text field
+	private String oldPath;	// Buffer for the path, in case of the button cancel is triggered
 	
 	/**
 	 * Constructor

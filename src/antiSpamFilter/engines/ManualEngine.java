@@ -12,7 +12,7 @@ import antiSpamFilter.datastore.RulesConfigList;
  */
 public class ManualEngine extends Observable	{
 	
-	private RulesConfigList configList;
+	private RulesConfigList configList;	// The configuration list, pairing rules and respective weights
 	
 	/**
 	 * Default constructor

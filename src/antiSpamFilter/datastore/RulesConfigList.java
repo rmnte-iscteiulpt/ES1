@@ -16,8 +16,8 @@ import java.util.ArrayList;
  */
 public class RulesConfigList {
 
-	private ArrayList<String> rulesList;
-	private ArrayList<Float> weightList;
+	private ArrayList<String> rulesList;	// The list containing the rules
+	private ArrayList<Float> weightList;	// The list containing the respective weights
 	
 	/**
 	 * Constructor that takes a list of rules and applies default weight values to each one

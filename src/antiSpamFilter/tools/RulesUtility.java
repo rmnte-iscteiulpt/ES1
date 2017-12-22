@@ -17,8 +17,8 @@ import antiSpamFilter.main.Main;
  */
 public class RulesUtility {
 
-	private String rulesPath;
-	private ArrayList<String> rulesList;
+	private String rulesPath;	// The path for the rules file
+	private ArrayList<String> rulesList;	// A list of the correspondent rules
 
 	/**
 	 * Default constructor
@@ -82,8 +82,9 @@ public class RulesUtility {
 		    br.close();
 		    return ruleList;
 		} catch (FileNotFoundException e1) {
-			System.out.println("Path for rules.cf file doesn't exist. Using the default file.");
+			System.out.println("Path for rules.cf file doesn't exist: Using the default file.");
 		} catch (IOException e1) {
+			System.out.println("IOException: Using the default file.");
 		}
 		return null;
 	}

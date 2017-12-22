@@ -19,11 +19,11 @@ import antiSpamFilter.gui.panes.TablePane;
  */
 public class WorkspacePanel extends JPanel	{
 	
-	private MainWindow mainWindow;
-	private TablePane tablePane;
-	private JPanel resultsPanel;
-	private JTextField fpValue;
-	private JTextField fnValue;
+	private MainWindow mainWindow;	// Pointer to the main window
+	private TablePane tablePane;	// The visual table view
+	private JPanel resultsPanel;	// The results panel, showing to the user the returning results from the evaluation
+	private JTextField fpValue;	// Value shown on the FP field
+	private JTextField fnValue;	// Value shown on the FN field
 	
 	/**
 	 * Constructor

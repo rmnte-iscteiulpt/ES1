@@ -20,8 +20,8 @@ import antiSpamFilter.main.Main;
  */
 public class AutomaticEngine extends Observable	{
 
-	private RulesConfigList configList;
-	private int lastRes[];
+	private RulesConfigList configList;	// Configuration list, a list that pairs a rule and the respective weight
+	private int lastRes[]; // The last results from a generated configuration
 	
 	/**
 	 * Default constructor

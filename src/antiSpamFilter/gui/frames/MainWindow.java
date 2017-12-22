@@ -25,13 +25,13 @@ import antiSpamFilter.tools.FileBrowser;
  */
 public class MainWindow extends JFrame {
 
-	private JButton optionsButton;
-	private JButton compileButton;
+	private JButton optionsButton;	// Options button, makes the options dialog visible
+	private JButton compileButton;	// Compile button, runs the compilers to create the .eps and .pdf files
 
-	private AlgorithmWorkspace autoPanel;
-	private ManualWorkspace manualPanel;
+	private AlgorithmWorkspace autoPanel;	// Automatic panel, contains the visual interface for the automatic section
+	private ManualWorkspace manualPanel;	// Manual panel, contains the visual interface for the manual section
 
-	private MainEngine mainEngine;
+	private MainEngine mainEngine;	// Pointer to the main engine
 	
 	/**
 	 * Constructor

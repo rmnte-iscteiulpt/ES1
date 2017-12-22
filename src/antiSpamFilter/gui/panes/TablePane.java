@@ -17,9 +17,9 @@ import antiSpamFilter.datastore.RulesConfigList;
  */
 public class TablePane extends JScrollPane	{
 
-	private boolean editable;
-	private JTable table;	// This table holds temporary values. The values used in the engine are from the weightList.
-	private ArrayList<Float> weightList;	// This arraylist holds the permanent values, used by the engine.
+	private boolean editable;	// Distinguishes the table from manual or automatic (editable or not editable)
+	private JTable table;	// This table holds temporary values. The values used in the engine are from the weightList
+	private ArrayList<Float> weightList;	// This array list holds the permanent values, used by the engine
 
 	/**
 	 * Constructor

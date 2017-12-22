@@ -16,19 +16,10 @@ public class Main {
 	public static final String defaultSpamPath = "/resources/defaultConfigFiles/spam.log";
 	
 	// Algorithm folder paths
-	public static final String experimentBaseDirectory = System.getProperty("user.dir") + "/experimentBaseDirectory";	// result folder
+	public static final String experimentBaseDirectory = System.getProperty("user.dir") + "/experimentBaseDirectory";
 	
 	// Default Export folder
 	public static final String defaultExportPath = System.getProperty("user.dir") + "\\AntiSpamConfigurationForLeisureMailbox\\customConfigFiles\\";
-	
-	/* 
-	 * BUGS:
-	 * 
-	 * TODO
-	 * Code Inspection Template reunion
-	 * Youtube showcase video
-	 * 
-	 */
 	
 	/**
 	 * Main method

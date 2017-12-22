@@ -20,22 +20,22 @@ import antiSpamFilter.tools.FileBrowser;
  */
 public class OptionsDialog extends JDialog	{
 	
-	private MainWindow frame;
+	private MainWindow frame;	// The main frame window
 	
-	private JButton applyButton;
-	private JButton cancelButton;
-	private JButton okButton;
-	private JButton rulesBrowseButton;
-	private JButton spamBrowseButton;
-	private JButton hamBrowseButton;
+	private JButton applyButton;	// The button that applies the configuration paths
+	private JButton cancelButton;	// The button that cancels changes to the configuration paths
+	private JButton okButton;	// The button that applies the configuration paths and closes the window
+	private JButton rulesBrowseButton;	// The button that initiates the FileBrowser class to locate the rules.cf file
+	private JButton spamBrowseButton;	// The button that initiates the FileBrowser class to locate the spam.log file
+	private JButton hamBrowseButton;	// The button that initiates the FileBrowser class to locate the ham.log file
 	
-	private FileLocationPanel rulesPanel;
-	private FileLocationPanel spamPanel;
-	private FileLocationPanel hamPanel;
+	private FileLocationPanel rulesPanel;	// Panel that contains the location path and check box for the rules.cf file
+	private FileLocationPanel spamPanel;	// Panel that contains the location path and check box for the spam.log file
+	private FileLocationPanel hamPanel;	// Panel that contains the location path and check box for the ham.log file
 
-	private FileBrowser rulesBrowser;
-	private FileBrowser spamBrowser;
-	private FileBrowser hamBrowser;
+	private FileBrowser rulesBrowser;	// FileBrowser for the rules.cf file
+	private FileBrowser spamBrowser;	// FileBrowser for the spam.log file
+	private FileBrowser hamBrowser;	// FileBrowser for the ham.log file
 	
 	/**
 	 * Constructor

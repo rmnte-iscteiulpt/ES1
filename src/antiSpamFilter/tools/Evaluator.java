@@ -20,21 +20,8 @@ import antiSpamFilter.main.Main;
 public class Evaluator {
 
 	
-	private String hamPath;
-	private String spamPath;
-	
-	/*
-	 * Notes and values:
-	 * 
-	 * Weight range: -5 to 5
-	 * 
-	 * Results handling:
-	 * sum>5 = spam
-	 * sum<=5 = safe
-	 * 
-	 * FP (false positives) means that a message was considered spam, when it was safe
-	 * FN (false negatives) means that a message was considered safe, when it was spam
-	 */
+	private String hamPath;	// The path for the ham.log file
+	private String spamPath;	// The path for the spam.log file
 	
 	/**
 	 * Default constructor, creating a evaluator using default log files
@@ -113,10 +100,13 @@ public class Evaluator {
 			br.close();
 			
 		} catch (FileNotFoundException e1) {
-			System.out.println("Ham.log file doesn't exist. Using the default file.");
+			System.out.println("Ham.log file doesn't exist: Using the default file.");
 			hamPath = Main.defaultHamPath;
 			return evaluate(list);
 		} catch (IOException e1) {
+			System.out.println("IOException: Using the default file.");
+			hamPath = Main.defaultHamPath;
+			return evaluate(list);
 		}
 		
 		// Load spam.log file from path and check for FN
@@ -145,10 +135,13 @@ public class Evaluator {
 			br.close();
 			
 		} catch (FileNotFoundException e1) {
-			System.out.println("Spam.log file doesn't exist. Using the default file.");
+			System.out.println("Spam.log file doesn't exist: Using the default file.");
 			spamPath = Main.defaultSpamPath;
 			return evaluate(list);
 		} catch (IOException e1) {
+			System.out.println("IOException: Using the default file.");
+			spamPath = Main.defaultSpamPath;
+			return evaluate(list);
 		}
 		//System.out.println("[Evaluator] Found " + res[0] + "FP and " + res[1] + "FN in the current configuration.");
 		return res;

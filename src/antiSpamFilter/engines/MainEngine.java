@@ -10,11 +10,11 @@ import antiSpamFilter.tools.RulesUtility;
  */
 public class MainEngine	{
 
-	private ManualEngine manualEngine;
-	private AutomaticEngine autoEngine;
+	private ManualEngine manualEngine;	// Manual engine, contains all the methods related to the manual workspace
+	private AutomaticEngine autoEngine;	// Automatic engine, contains all the methods related to the automatic workspace and algorithm generation
 	
-	private Evaluator evaluator;
-	private RulesUtility rulesUtility;
+	private Evaluator evaluator;	// Evaluator, this class will evaluate a RulesConfigList, returning the FP and FN
+	private RulesUtility rulesUtility;	// The rules holder class, used to double check imports exports and inconsistencies
 	 
 	/**
 	 * Default constructor

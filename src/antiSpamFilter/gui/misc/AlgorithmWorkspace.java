@@ -25,7 +25,7 @@ import antiSpamFilter.tools.FileBrowser;
 @SuppressWarnings("serial")
 public class AlgorithmWorkspace extends WorkspacePanel implements Observer	{
 
-	private JButton exportButton;
+	private JButton exportButton;	// Exports the current configuration to the chosen .cfg file
 	
 	/**
 	 * Constructor
